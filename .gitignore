@@ -1,0 +1,5 @@
+**/Podfile.lock
+**/.DS_Store
+
+Scripts/DistrictsParser/.idea
+Scripts/DistrictsParser/census_data
