@@ -15,6 +15,7 @@
 		1304018D1F9E39000038EBEE /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
 		137ACB271F9D943600E25AB0 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
 		137ACB2A1F9D951C00E25AB0 /* DistrictManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB291F9D951C00E25AB0 /* DistrictManager.swift */; };
+		138FC13A1F9E9C5D001296DF /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138FC1391F9E9C5D001296DF /* CardView.xib */; };
 		13A1B5F91F9D9039007F7CD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */; };
 		13A1B5FB1F9D9039007F7CD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */; };
 		13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */; };
@@ -42,6 +43,9 @@
 		137ACB281F9D948700E25AB0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		137ACB291F9D951C00E25AB0 /* DistrictManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictManager.swift; sourceTree = "<group>"; };
 		137ACB2F1F9D99D700E25AB0 /* districts.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = districts.sql; path = ../../../Scripts/DistrictsParser/districts.sql; sourceTree = "<group>"; };
+		138FC1391F9E9C5D001296DF /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		138FC13B1F9EB2E2001296DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		138FC13C1F9EB41F001296DF /* Dosis.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dosis.otf; sourceTree = "<group>"; };
 		13A1B5F51F9D9039007F7CD7 /* gerrymandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gerrymandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 			children = (
 				13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */,
 				13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */,
+				138FC1391F9E9C5D001296DF /* CardView.xib */,
+				138FC13C1F9EB41F001296DF /* Dosis.otf */,
 				137ACB2F1F9D99D700E25AB0 /* districts.sql */,
 				13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */,
 			);
@@ -144,6 +150,7 @@
 		E2C959DE8D4821A04071907A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				138FC13B1F9EB2E2001296DF /* MapKit.framework */,
 				137ACB281F9D948700E25AB0 /* CoreLocation.framework */,
 				021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */,
 			);
@@ -246,6 +253,7 @@
 			files = (
 				1304018B1F9E38840038EBEE /* districts.sql in Resources */,
 				13A1B6031F9D9039007F7CD7 /* LaunchScreen.storyboard in Resources */,
+				138FC13A1F9E9C5D001296DF /* CardView.xib in Resources */,
 				13A1B6001F9D9039007F7CD7 /* Assets.xcassets in Resources */,
 				13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */,
 			);
