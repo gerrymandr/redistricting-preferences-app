@@ -30,9 +30,9 @@ protocol DraggableCardDelegate: class {
 }
 
 //Drag animation constants
-private let rotationMax: CGFloat = 1.0
+private let defaultRotationMax: CGFloat = 1.0
 private let defaultRotationAngle = CGFloat(Double.pi) / 10.0
-private let scaleMin: CGFloat = 0.8
+private let defaultScaleMin: CGFloat = 0.8
 
 private let screenSize = UIScreen.main.bounds.size
 
@@ -44,8 +44,17 @@ private let cardResetAnimationDuration: TimeInterval = 0.2
 internal var cardSwipeActionAnimationDuration: TimeInterval = DragSpeed.default.rawValue
 
 public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
+
+    //Drag animation constants
+    public var rotationMax = defaultRotationMax
+    public var rotationAngle = defaultRotationAngle
+    public var scaleMin = defaultScaleMin
     
-    weak var delegate: DraggableCardDelegate?
+    weak var delegate: DraggableCardDelegate? {
+        didSet {
+            configureSwipeSpeed()
+        }
+    }
     
     private var overlayView: OverlayView?
     private(set) var contentView: UIView?
@@ -94,6 +103,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         addGestureRecognizer(panGestureRecognizer)
         panGestureRecognizer.delegate = self
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DraggableCardView.tapRecognized(_:)))
+        tapGestureRecognizer.delegate = self
         tapGestureRecognizer.cancelsTouchesInView = false
         addGestureRecognizer(tapGestureRecognizer)
 
@@ -116,11 +126,11 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         } else {
             self.addSubview(view)
         }
-        
+
         self.contentView = view
         configureContentView()
     }
-    
+
     private func configureOverlayView() {
         if let overlay = self.overlayView {
             overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -202,8 +212,14 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
+    func configureSwipeSpeed() {
+        if let delegate = delegate {
+            cardSwipeActionAnimationDuration = delegate.card(cardSwipeSpeed: self).rawValue
+        }
+    }
+    
     //MARK: GestureRecognizers
-    func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
         dragDistance = gestureRecognizer.translation(in: self)
         
         let touchLocation = gestureRecognizer.location(in: self)
@@ -227,7 +243,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             
         case .changed:
             let rotationStrength = min(dragDistance.x / frame.width, rotationMax)
-            let rotationAngle = animationDirectionY * defaultRotationAngle * rotationStrength
+            let rotationAngle = animationDirectionY * self.rotationAngle * rotationStrength
             let scaleStrength = 1 - ((1 - scaleMin) * fabs(rotationStrength))
             let scale = max(scaleStrength, scaleMin)
     
@@ -256,10 +272,13 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchView = touch.view, let _ = touchView as? UIControl {
+            return false
+        }
         return delegate?.card(cardShouldDrag: self) ?? true
     }
     
-    func tapRecognized(_ recogznier: UITapGestureRecognizer) {
+    @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
         delegate?.card(cardWasTapped: self)
     }
     
@@ -334,7 +353,6 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     private func animationRotationForDirection(_ direction: SwipeResultDirection) -> CGFloat {
         return CGFloat(direction.bearing / 2.0 - Double.pi / 4)
     }
-
     
     private func swipeAction(_ direction: SwipeResultDirection) {
         overlayView?.overlayState = direction

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0F9427A934E601B4401F9912 /* Pods_gerrymandr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */; };
+		130401831F9E380F0038EBEE /* districtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130401821F9E380F0038EBEE /* districtTests.swift */; };
+		1304018A1F9E38840038EBEE /* districts.sql in Resources */ = {isa = PBXBuildFile; fileRef = 137ACB2F1F9D99D700E25AB0 /* districts.sql */; };
+		1304018B1F9E38840038EBEE /* districts.sql in Resources */ = {isa = PBXBuildFile; fileRef = 137ACB2F1F9D99D700E25AB0 /* districts.sql */; };
+		1304018C1F9E38FE0038EBEE /* DistrictManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB291F9D951C00E25AB0 /* DistrictManager.swift */; };
+		1304018D1F9E39000038EBEE /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
+		137ACB271F9D943600E25AB0 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
+		137ACB2A1F9D951C00E25AB0 /* DistrictManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB291F9D951C00E25AB0 /* DistrictManager.swift */; };
 		13A1B5F91F9D9039007F7CD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */; };
 		13A1B5FB1F9D9039007F7CD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */; };
 		13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */; };
@@ -15,9 +22,26 @@
 		13A1B6031F9D9039007F7CD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		130401851F9E380F0038EBEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13A1B5ED1F9D9039007F7CD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13A1B5F41F9D9039007F7CD7;
+			remoteInfo = gerrymandr;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gerrymandr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B81A892CBA5C88243672401 /* Pods-gerrymandr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gerrymandr.release.xcconfig"; path = "Pods/Target Support Files/Pods-gerrymandr/Pods-gerrymandr.release.xcconfig"; sourceTree = "<group>"; };
+		130401801F9E380F0038EBEE /* gerrymandrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gerrymandrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		130401821F9E380F0038EBEE /* districtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = districtTests.swift; sourceTree = "<group>"; };
+		130401841F9E380F0038EBEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		137ACB261F9D943600E25AB0 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		137ACB281F9D948700E25AB0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		137ACB291F9D951C00E25AB0 /* DistrictManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictManager.swift; sourceTree = "<group>"; };
+		137ACB2F1F9D99D700E25AB0 /* districts.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = districts.sql; path = ../../../Scripts/DistrictsParser/districts.sql; sourceTree = "<group>"; };
 		13A1B5F51F9D9039007F7CD7 /* gerrymandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gerrymandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +53,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1304017D1F9E380F0038EBEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13A1B5F21F9D9039007F7CD7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,10 +71,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		130401811F9E380F0038EBEE /* gerrymandrTests */ = {
+			isa = PBXGroup;
+			children = (
+				130401821F9E380F0038EBEE /* districtTests.swift */,
+				130401841F9E380F0038EBEE /* Info.plist */,
+			);
+			path = gerrymandrTests;
+			sourceTree = "<group>";
+		};
+		137ACB251F9D941200E25AB0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				137ACB261F9D943600E25AB0 /* District.swift */,
+				137ACB291F9D951C00E25AB0 /* DistrictManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		137ACB2E1F9D98A000E25AB0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */,
+				13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */,
+				137ACB2F1F9D99D700E25AB0 /* districts.sql */,
+				13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		13A1B5EC1F9D9039007F7CD7 = {
 			isa = PBXGroup;
 			children = (
 				13A1B5F71F9D9039007F7CD7 /* gerrymandr */,
+				130401811F9E380F0038EBEE /* gerrymandrTests */,
 				13A1B5F61F9D9039007F7CD7 /* Products */,
 				B4B3F0CC3484DBAA058E5E9F /* Pods */,
 				E2C959DE8D4821A04071907A /* Frameworks */,
@@ -54,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				13A1B5F51F9D9039007F7CD7 /* gerrymandr.app */,
+				130401801F9E380F0038EBEE /* gerrymandrTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,12 +123,11 @@
 		13A1B5F71F9D9039007F7CD7 /* gerrymandr */ = {
 			isa = PBXGroup;
 			children = (
+				137ACB251F9D941200E25AB0 /* Data */,
 				13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */,
 				13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */,
-				13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */,
-				13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */,
-				13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */,
 				13A1B6041F9D9039007F7CD7 /* Info.plist */,
+				137ACB2E1F9D98A000E25AB0 /* Resources */,
 			);
 			path = gerrymandr;
 			sourceTree = "<group>";
@@ -83,6 +144,7 @@
 		E2C959DE8D4821A04071907A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				137ACB281F9D948700E25AB0 /* CoreLocation.framework */,
 				021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */,
 			);
 			name = Frameworks;
@@ -91,6 +153,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1304017F1F9E380F0038EBEE /* gerrymandrTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 130401891F9E380F0038EBEE /* Build configuration list for PBXNativeTarget "gerrymandrTests" */;
+			buildPhases = (
+				1304017C1F9E380F0038EBEE /* Sources */,
+				1304017D1F9E380F0038EBEE /* Frameworks */,
+				1304017E1F9E380F0038EBEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				130401861F9E380F0038EBEE /* PBXTargetDependency */,
+			);
+			name = gerrymandrTests;
+			productName = gerrymandrTests;
+			productReference = 130401801F9E380F0038EBEE /* gerrymandrTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		13A1B5F41F9D9039007F7CD7 /* gerrymandr */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13A1B6071F9D9039007F7CD7 /* Build configuration list for PBXNativeTarget "gerrymandr" */;
@@ -121,6 +201,11 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = mggg;
 				TargetAttributes = {
+					1304017F1F9E380F0038EBEE = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13A1B5F41F9D9039007F7CD7;
+					};
 					13A1B5F41F9D9039007F7CD7 = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
@@ -141,15 +226,25 @@
 			projectRoot = "";
 			targets = (
 				13A1B5F41F9D9039007F7CD7 /* gerrymandr */,
+				1304017F1F9E380F0038EBEE /* gerrymandrTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1304017E1F9E380F0038EBEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1304018A1F9E38840038EBEE /* districts.sql in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13A1B5F31F9D9039007F7CD7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1304018B1F9E38840038EBEE /* districts.sql in Resources */,
 				13A1B6031F9D9039007F7CD7 /* LaunchScreen.storyboard in Resources */,
 				13A1B6001F9D9039007F7CD7 /* Assets.xcassets in Resources */,
 				13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */,
@@ -215,16 +310,36 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1304017C1F9E380F0038EBEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				130401831F9E380F0038EBEE /* districtTests.swift in Sources */,
+				1304018D1F9E39000038EBEE /* District.swift in Sources */,
+				1304018C1F9E38FE0038EBEE /* DistrictManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13A1B5F11F9D9039007F7CD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				13A1B5FB1F9D9039007F7CD7 /* ViewController.swift in Sources */,
+				137ACB2A1F9D951C00E25AB0 /* DistrictManager.swift in Sources */,
+				137ACB271F9D943600E25AB0 /* District.swift in Sources */,
 				13A1B5F91F9D9039007F7CD7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		130401861F9E380F0038EBEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13A1B5F41F9D9039007F7CD7 /* gerrymandr */;
+			targetProxy = 130401851F9E380F0038EBEE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */ = {
@@ -246,6 +361,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		130401871F9E380F0038EBEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM7C5GAD2Z;
+				INFOPLIST_FILE = gerrymandrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mggg.gerrymandrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gerrymandr.app/gerrymandr";
+			};
+			name = Debug;
+		};
+		130401881F9E380F0038EBEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM7C5GAD2Z;
+				INFOPLIST_FILE = gerrymandrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mggg.gerrymandrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gerrymandr.app/gerrymandr";
+			};
+			name = Release;
+		};
 		13A1B6051F9D9039007F7CD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -388,6 +535,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		130401891F9E380F0038EBEE /* Build configuration list for PBXNativeTarget "gerrymandrTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				130401871F9E380F0038EBEE /* Debug */,
+				130401881F9E380F0038EBEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		13A1B5F01F9D9039007F7CD7 /* Build configuration list for PBXProject "gerrymandr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

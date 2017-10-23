@@ -1,5 +1,5 @@
 use_frameworks!
 
 target 'gerrymandr' do
-	pod 'Koloda'
+	pod 'Koloda', '4.3.1'
 end

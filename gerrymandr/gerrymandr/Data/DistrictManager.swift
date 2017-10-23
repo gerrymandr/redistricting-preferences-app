@@ -14,6 +14,8 @@ class DistrictManager {
     var db: OpaquePointer?
     var districtCount = 0
     
+    static var sharedInstance = DistrictManager()
+    
     init(){
         let sqlPath = Bundle.main.path(forResource: "districts", ofType: "sql")
         
@@ -50,7 +52,7 @@ class DistrictManager {
             return nil
         }
         
-        guard sqlite3_bind_int(queryStatement, 0, i) == SQLITE_OK else {
+        guard sqlite3_bind_int(queryStatement, 1, i) == SQLITE_OK else {
             NSLog("Unable to bind random number.")
             return nil
         }
@@ -63,6 +65,8 @@ class DistrictManager {
         let state = Int(sqlite3_column_int(queryStatement, 1))
         let district = Int(sqlite3_column_int(queryStatement, 2))
         let coordString = String(cString: sqlite3_column_text(queryStatement, 3))
+        
+        sqlite3_finalize(queryStatement)
         
         var coords = [CLLocation]()
         
