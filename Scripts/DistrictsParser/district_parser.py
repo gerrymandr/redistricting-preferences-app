@@ -37,12 +37,9 @@ curs = conn.cursor()
 # state - INTEGER: state FIPS code
 # number - INTEGER: district number
 # coordinates - STRING: comma seperated vertices of the geographic polygon
-# viewed - BOOLEAN: False if user has not viewed
-# time_deciding - NUMBER: Time the user viewed the district before deciding
-# uploaded -- BOOLEAN: True if the result has been logged on the server
 
-curs.execute("CREATE TABLE districts (id INTEGER PRIMARY KEY, state INTEGER, number INTEGER, coordinates STRING, viewed BOOLEAN, time_deciding DECIMAL, uploaded BOOLEAN)")
-curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, FALSE, NULL, FALSE)", districts)
+curs.execute("CREATE TABLE districts (id INTEGER PRIMARY KEY, state INTEGER, number INTEGER, coordinates STRING)")
+curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?)", districts)
 
 conn.commit()
 conn.close()
