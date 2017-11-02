@@ -22,7 +22,8 @@ for dist in data:
 
     coords = ""
     for vertex in shapes[i].vertices:
-        coords += "{},{} ".format(vertex[0], vertex[1])
+        # pysal oddly does long, lat; we want lat, long
+        coords += "{},{} ".format(vertex[1], vertex[0])
 
     districts.append((i, state, district_number, coords.strip()))
 

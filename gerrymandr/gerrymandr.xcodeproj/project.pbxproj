@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0F9427A934E601B4401F9912 /* Pods_gerrymandr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */; };
+		130135991FABCA5C00B820A7 /* states.plist in Resources */ = {isa = PBXBuildFile; fileRef = 130135981FABCA5C00B820A7 /* states.plist */; };
+		1301359B1FABD0D600B820A7 /* districts.sql in Resources */ = {isa = PBXBuildFile; fileRef = 1301359A1FABD07D00B820A7 /* districts.sql */; };
+		1301359C1FABD72B00B820A7 /* Dosis.otf in Resources */ = {isa = PBXBuildFile; fileRef = 138FC13C1F9EB41F001296DF /* Dosis.otf */; };
 		130401831F9E380F0038EBEE /* districtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130401821F9E380F0038EBEE /* districtTests.swift */; };
-		1304018A1F9E38840038EBEE /* districts.sql in Resources */ = {isa = PBXBuildFile; fileRef = 137ACB2F1F9D99D700E25AB0 /* districts.sql */; };
-		1304018B1F9E38840038EBEE /* districts.sql in Resources */ = {isa = PBXBuildFile; fileRef = 137ACB2F1F9D99D700E25AB0 /* districts.sql */; };
 		1304018C1F9E38FE0038EBEE /* DistrictManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB291F9D951C00E25AB0 /* DistrictManager.swift */; };
 		1304018D1F9E39000038EBEE /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
 		137ACB271F9D943600E25AB0 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB261F9D943600E25AB0 /* District.swift */; };
 		137ACB2A1F9D951C00E25AB0 /* DistrictManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137ACB291F9D951C00E25AB0 /* DistrictManager.swift */; };
 		138FC13A1F9E9C5D001296DF /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138FC1391F9E9C5D001296DF /* CardView.xib */; };
 		13A1B5F91F9D9039007F7CD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */; };
-		13A1B5FB1F9D9039007F7CD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */; };
+		13A1B5FB1F9D9039007F7CD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1B5FA1F9D9039007F7CD7 /* MainViewController.swift */; };
 		13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B5FC1F9D9039007F7CD7 /* Main.storyboard */; };
 		13A1B6001F9D9039007F7CD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */; };
 		13A1B6031F9D9039007F7CD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */; };
@@ -36,19 +37,20 @@
 /* Begin PBXFileReference section */
 		021B302D3CBEB6F130271AD7 /* Pods_gerrymandr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gerrymandr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B81A892CBA5C88243672401 /* Pods-gerrymandr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gerrymandr.release.xcconfig"; path = "Pods/Target Support Files/Pods-gerrymandr/Pods-gerrymandr.release.xcconfig"; sourceTree = "<group>"; };
+		130135981FABCA5C00B820A7 /* states.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = states.plist; path = ../../../Scripts/FIPS2plist/states.plist; sourceTree = "<group>"; };
+		1301359A1FABD07D00B820A7 /* districts.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = districts.sql; path = ../../../Scripts/DistrictsParser/districts.sql; sourceTree = "<group>"; };
 		130401801F9E380F0038EBEE /* gerrymandrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gerrymandrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		130401821F9E380F0038EBEE /* districtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = districtTests.swift; sourceTree = "<group>"; };
 		130401841F9E380F0038EBEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		137ACB261F9D943600E25AB0 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		137ACB281F9D948700E25AB0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		137ACB291F9D951C00E25AB0 /* DistrictManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictManager.swift; sourceTree = "<group>"; };
-		137ACB2F1F9D99D700E25AB0 /* districts.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = districts.sql; path = ../../../Scripts/DistrictsParser/districts.sql; sourceTree = "<group>"; };
 		138FC1391F9E9C5D001296DF /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		138FC13B1F9EB2E2001296DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		138FC13C1F9EB41F001296DF /* Dosis.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dosis.otf; sourceTree = "<group>"; };
 		13A1B5F51F9D9039007F7CD7 /* gerrymandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gerrymandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		13A1B5FA1F9D9039007F7CD7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		13A1B5FD1F9D9039007F7CD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13A1B6021F9D9039007F7CD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,7 +102,8 @@
 				13A1B6011F9D9039007F7CD7 /* LaunchScreen.storyboard */,
 				138FC1391F9E9C5D001296DF /* CardView.xib */,
 				138FC13C1F9EB41F001296DF /* Dosis.otf */,
-				137ACB2F1F9D99D700E25AB0 /* districts.sql */,
+				1301359A1FABD07D00B820A7 /* districts.sql */,
+				130135981FABCA5C00B820A7 /* states.plist */,
 				13A1B5FF1F9D9039007F7CD7 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -131,7 +134,7 @@
 			children = (
 				137ACB251F9D941200E25AB0 /* Data */,
 				13A1B5F81F9D9039007F7CD7 /* AppDelegate.swift */,
-				13A1B5FA1F9D9039007F7CD7 /* ViewController.swift */,
+				13A1B5FA1F9D9039007F7CD7 /* MainViewController.swift */,
 				13A1B6041F9D9039007F7CD7 /* Info.plist */,
 				137ACB2E1F9D98A000E25AB0 /* Resources */,
 			);
@@ -243,7 +246,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1304018A1F9E38840038EBEE /* districts.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1304018B1F9E38840038EBEE /* districts.sql in Resources */,
+				1301359C1FABD72B00B820A7 /* Dosis.otf in Resources */,
+				1301359B1FABD0D600B820A7 /* districts.sql in Resources */,
 				13A1B6031F9D9039007F7CD7 /* LaunchScreen.storyboard in Resources */,
+				130135991FABCA5C00B820A7 /* states.plist in Resources */,
 				138FC13A1F9E9C5D001296DF /* CardView.xib in Resources */,
 				13A1B6001F9D9039007F7CD7 /* Assets.xcassets in Resources */,
 				13A1B5FE1F9D9039007F7CD7 /* Main.storyboard in Resources */,
@@ -332,7 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13A1B5FB1F9D9039007F7CD7 /* ViewController.swift in Sources */,
+				13A1B5FB1F9D9039007F7CD7 /* MainViewController.swift in Sources */,
 				137ACB2A1F9D951C00E25AB0 /* DistrictManager.swift in Sources */,
 				137ACB271F9D943600E25AB0 /* District.swift in Sources */,
 				13A1B5F91F9D9039007F7CD7 /* AppDelegate.swift in Sources */,

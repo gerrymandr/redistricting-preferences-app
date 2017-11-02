@@ -11,7 +11,12 @@ with open(fips_path, 'r') as file:
 
     for line in file:
         separated = line.split('|')
-        statesDict[separated[0]] = separated[2]
+	
+        stateCode = separated[0]
+        if stateCode[0]=="0":
+            stateCode=stateCode[1]
+
+        statesDict[stateCode] = separated[2]
 
 with open(dump_path, 'wb') as dump:
     plistlib.dump(statesDict, dump)

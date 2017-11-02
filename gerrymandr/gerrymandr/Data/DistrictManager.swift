@@ -13,11 +13,13 @@ import CoreLocation
 class DistrictManager {
     var db: OpaquePointer?
     var districtCount = 0
+    var fipsDictionary: Dictionary<String, String>
     
     static var sharedInstance = DistrictManager()
     
     init(){
         let sqlPath = Bundle.main.path(forResource: "districts", ofType: "sql")
+        let statesPath = Bundle.main.path(forResource: "states", ofType: "plist")
         
         if sqlite3_open(sqlPath, &db) != SQLITE_OK{
             db = nil
@@ -34,6 +36,8 @@ class DistrictManager {
             }
             sqlite3_finalize(countStatement)
         }
+        
+        fipsDictionary = NSDictionary(contentsOfFile: statesPath!) as! Dictionary<String, String>
     }
     
     func getRandomDistrict() -> District?{
@@ -77,4 +81,9 @@ class DistrictManager {
         
         return District(stateCode: state, districtNumber: district, coordinates: coords)
     }
+    
+    func getStateName(district: District) -> String{
+        return fipsDictionary[String(district.stateCode)]!
+    }
+    
 }
