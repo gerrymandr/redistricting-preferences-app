@@ -61,7 +61,7 @@ for dist in data:
                         if people == -1:
                             people = int(line[data_column_index])
                         elif race not in line[2]:
-                            race += line[data_column_index] + ", "
+                            race += line[data_column_index] + ","
 
                     elif "Hispanic" in line[1] and hispanic == -1:
                         hispanic = int(line[data_column_index])
@@ -71,7 +71,7 @@ for dist in data:
                             if "9th" in line[2]:
                                 l_hs += int(line[data_column_index])
                             else:
-                                education += line[data_column_index] + ", "
+                                education += line[data_column_index] + ","
 
                     elif "Income and Benefits" in line[1]:
                         if "Median" in line[2]:
@@ -88,7 +88,7 @@ for dist in data:
         # pysal oddly does long, lat; we want lat, long
         coords += "{},{} ".format(vertex[1], vertex[0])
 
-    districts.append((i, name, district_number, coords.strip(), people, hispanic, medage, medincome, race[:-2], str(l_hs) + ", " + education[:-2]))
+    districts.append((i, name, district_number, coords.strip(), people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1]))
 
     i += 1
 
