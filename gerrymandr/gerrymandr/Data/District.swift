@@ -9,7 +9,17 @@
 import CoreLocation
 
 struct District {
-    var stateCode: Int
+    var state: String
     var districtNumber: Int
     var coordinates: [CLLocation]
+    var numPeople: Int
+    var numHispanic: Int
+    var medAge: Double
+    var medIncome: Double
+    
+    // White, A.A, A.I., Asian, N.H.
+    var race: [Double]
+    
+    // <HS, HS, Some College, 2 yr, 4 yr, Grad
+    var education: [Double]
 }

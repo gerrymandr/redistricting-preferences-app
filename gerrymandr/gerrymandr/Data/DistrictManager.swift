@@ -13,13 +13,11 @@ import CoreLocation
 class DistrictManager {
     var db: OpaquePointer?
     var districtCount = 0
-    var fipsDictionary: Dictionary<String, String>
     
     static var sharedInstance = DistrictManager()
     
     init(){
         let sqlPath = Bundle.main.path(forResource: "districts", ofType: "sql")
-        let statesPath = Bundle.main.path(forResource: "states", ofType: "plist")
         
         if sqlite3_open(sqlPath, &db) != SQLITE_OK{
             db = nil
@@ -37,7 +35,6 @@ class DistrictManager {
             sqlite3_finalize(countStatement)
         }
         
-        fipsDictionary = NSDictionary(contentsOfFile: statesPath!) as! Dictionary<String, String>
     }
     
     func getRandomDistrict() -> District?{
@@ -66,24 +63,36 @@ class DistrictManager {
             return nil
         }
         
-        let state = Int(sqlite3_column_int(queryStatement, 1))
+        let state = String(cString: sqlite3_column_text(queryStatement, 1))
         let district = Int(sqlite3_column_int(queryStatement, 2))
         let coordString = String(cString: sqlite3_column_text(queryStatement, 3))
+        let numPeople = Int(sqlite3_column_int(queryStatement, 4))
+        let numHispanic = Int(sqlite3_column_int(queryStatement, 5))
+        let medAge = Double(sqlite3_column_double(queryStatement, 6))
+        let medIncome = Double(sqlite3_column_double(queryStatement, 7))
+        let raceString = String(cString: sqlite3_column_text(queryStatement, 8))
+        let educationString = String(cString: sqlite3_column_text(queryStatement, 9))
         
         sqlite3_finalize(queryStatement)
         
         var coords = [CLLocation]()
+        var education = [Double]()
+        var race = [Double]()
         
         for pair in coordString.split(separator: " "){
             let split = pair.split(separator: ",")
             coords.append(CLLocation(latitude: Double(split[0])!, longitude: Double(split[1])!))
         }
         
-        return District(stateCode: state, districtNumber: district, coordinates: coords)
+        for raceNum in raceString.split(separator: ","){
+            race.append(Double(raceNum)!)
+        }
+        for edNum in educationString.split(separator: ","){
+            education.append(Double(edNum)!)
+        }
+        
+        return District(state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education)
     }
-    
-    func getStateName(district: District) -> String{
-        return fipsDictionary[String(district.stateCode)]!
-    }
+
     
 }

@@ -51,7 +51,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     }
 
     @objc func buttonTapped(){
-        
+        self.performSegue(withIdentifier: "showInfo", sender: nil)
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
@@ -125,10 +125,10 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         map.setRegion(MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY)), animated: false)
         
         if district.districtNumber == 0{
-            label.text = dMan.getStateName(district: district) + " at large"
+            label.text = district.state + " at large"
         }
         else{
-            label.text = dMan.getStateName(district: district)+" \(district.districtNumber)"
+            label.text = district.state+" \(district.districtNumber)"
         }
     }
     
@@ -146,14 +146,16 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         return MKPolygonRenderer()
     }
     @IBAction func fairButtonClicked(_ sender: Any) {
-        
         kolodaView.swipe(.right)
-    
     }
     @IBAction func unfairButtonClicked(_ sender: Any) {
-    
         kolodaView.swipe(.left)
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showInfo"{
+            (segue.destination as! InfoTableViewController).currentDistrict = district
+        }
     }
     
 }
