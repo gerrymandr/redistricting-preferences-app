@@ -60,7 +60,7 @@ for dist in data:
                     if line[1] == "Race":
                         if people == -1:
                             people = int(line[data_column_index])
-                        elif race not in line[2]:
+                        elif "race" not in line[2]:
                             race += line[data_column_index] + ","
 
                     elif "Hispanic" in line[1] and hispanic == -1:
