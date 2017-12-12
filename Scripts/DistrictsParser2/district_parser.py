@@ -5,8 +5,8 @@ import json
 import csv
 
 # Gets path for resources
-shape_path = os.getcwd() + "/Shapefiles/cb_2016_us_cd115_500k.shp"
-data_path = os.getcwd() + "/Shapefiles/cb_2016_us_cd115_500k.dbf"
+shape_path = os.getcwd() + "/ShapeFiles/cb_2016_us_cd115_500k.shp"
+data_path = os.getcwd() + "/ShapeFiles/cb_2016_us_cd115_500k.dbf"
 json_path = os.getcwd() + "/states.json"
 demographics_folder_path = os.getcwd() + "/DemographicsData/"
 
@@ -63,7 +63,7 @@ for dist in data:
                         elif "race" not in line[2]:
                             race += line[data_column_index] + ","
 
-                    elif "Hispanic" in line[1] and hispanic == -1:
+                    elif "Hispanic" in line[1] and hispanic == -1 and "Hispanic" in line[2]:
                         hispanic = int(line[data_column_index])
 
                     elif "Educational" in line[1]:
