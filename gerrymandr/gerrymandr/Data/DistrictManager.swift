@@ -63,6 +63,7 @@ class DistrictManager {
             return nil
         }
         
+        let id = Int(sqlite3_column_int(queryStatement, 0))
         let state = String(cString: sqlite3_column_text(queryStatement, 1))
         let district = Int(sqlite3_column_int(queryStatement, 2))
         let coordString = String(cString: sqlite3_column_text(queryStatement, 3))
@@ -91,7 +92,7 @@ class DistrictManager {
             education.append(Double(edNum)!)
         }
         
-        return District(state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education)
+        return District(id: id, state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education)
     }
 
     

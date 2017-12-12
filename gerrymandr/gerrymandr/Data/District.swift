@@ -8,7 +8,8 @@
 
 import CoreLocation
 
-struct District {
+class District {
+    var id: Int
     var state: String
     var districtNumber: Int
     var coordinates: [CLLocation]
@@ -22,4 +23,23 @@ struct District {
     
     // <HS, HS, Some College, 2 yr, 4 yr, Grad
     var education: [Double]
+    
+    // Full map, demographics, race, income, education, graph (to be added)
+    var viewedStats = Array(repeating: false, count: 6)
+    var fair = false
+    var startedViewing = Date()
+    var stoppedViewing: Date?
+    
+    init(id: Int, state: String, districtNumber: Int, coordinates: [CLLocation], numPeople: Int, numHispanic: Int, medAge: Double, medIncome: Double, race: [Double], education: [Double]){
+        self.id = id
+        self.state = state
+        self.districtNumber = districtNumber
+        self.coordinates = coordinates
+        self.numPeople = numPeople
+        self.numHispanic = numHispanic
+        self.medAge = medAge
+        self.medIncome = medIncome
+        self.race = race
+        self.education = education
+    }
 }

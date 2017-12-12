@@ -15,8 +15,13 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     @IBOutlet weak var kolodaView: KolodaView!
    
     let dMan = DistrictManager.sharedInstance
+    let awsMan = AWSManager.sharedInstance
+    
     var cardView = Bundle.main.loadNibNamed("CardView", owner: nil, options: nil)![0] as! UIView
     var district: District?
+    
+    var polygon: MKPolygon?
+    var region: MKCoordinateRegion?
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent}
     
@@ -39,9 +44,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
-        
-        district = dMan.getRandomDistrict()
-        
+                
         
     }
 
@@ -52,6 +55,16 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
 
     @objc func buttonTapped(){
         self.performSegue(withIdentifier: "showInfo", sender: nil)
+    }
+    
+    func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        if direction == .right{
+            district!.fair = true
+        }
+        district!.stoppedViewing = Date()
+        
+        awsMan.submitDistrictEval(district: district!)
+        
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
@@ -76,6 +89,10 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             configureView(district: district!)
         }
         return self.cardView
+    }
+    
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+        return Bundle.main.loadNibNamed("CustomOverlayView", owner: nil, options: nil)?[0] as? OverlayView
     }
     
     func configureView(district: District){
@@ -117,22 +134,28 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             
         }
         
-        let overlay = MKPolygon(points: mapPoints, count: mapPoints.count)
-        if map.overlays.count == 1{
-            map.remove(map.overlays[0])
-        }
-        map.add(overlay)
-        map.setRegion(MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY)), animated: false)
+        let tile = MKTileOverlay(urlTemplate: nil)
+        tile.canReplaceMapContent = true
+        map.add(tile)
         
-        if district.districtNumber == 0{
-            label.text = district.state + " at large"
+        let overlay = MKPolygon(points: mapPoints, count: mapPoints.count)
+        
+        if let _ = polygon{
+            map.remove(polygon!)
         }
-        else{
-            label.text = district.state+" \(district.districtNumber)"
-        }
+        
+        polygon = overlay
+        
+        map.add(overlay)
+        
+        region = MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY))
+        map.setRegion(region!, animated: false)
+        
+        label.text = "Mystery District #" + String(district.id)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
         if let polygon = overlay as? MKPolygon{
             
             let renderer = MKPolygonRenderer(polygon: polygon)
@@ -143,7 +166,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             return renderer
         }
         
-        return MKPolygonRenderer()
+        return BlankRenderer(overlay: overlay)
     }
     @IBAction func fairButtonClicked(_ sender: Any) {
         kolodaView.swipe(.right)
@@ -154,9 +177,19 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showInfo"{
-            (segue.destination as! InfoTableViewController).currentDistrict = district
+            let dest = ((segue.destination as! UINavigationController).viewControllers[0] as! InfoTableViewController)
+            dest.currentDistrict = district
+            dest.overlay = polygon
+            dest.region = region
         }
     }
     
 }
 
+class BlankRenderer: MKOverlayRenderer{
+    override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
+        let rect = self.rect(for: mapRect)
+        context.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        context.fill(rect)
+    }
+}
