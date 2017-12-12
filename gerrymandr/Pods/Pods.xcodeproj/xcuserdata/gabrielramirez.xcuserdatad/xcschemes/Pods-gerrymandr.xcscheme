@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9AD116303D5E06C5D648D32F114FE0D"
+               BlueprintIdentifier = "F88C0E25E15256155D830238115634D9"
                BuildableName = "Pods_gerrymandr.framework"
                BlueprintName = "Pods-gerrymandr"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9AD116303D5E06C5D648D32F114FE0D"
+            BlueprintIdentifier = "F88C0E25E15256155D830238115634D9"
             BuildableName = "Pods_gerrymandr.framework"
             BlueprintName = "Pods-gerrymandr"
             ReferencedContainer = "container:Pods.xcodeproj">

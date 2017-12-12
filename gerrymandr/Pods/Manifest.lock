@@ -1,15 +1,30 @@
 PODS:
+  - AWSCognito (2.6.4):
+    - AWSCore (= 2.6.4)
+  - AWSCore (2.6.4)
+  - AWSDynamoDB (2.6.4):
+    - AWSCore (= 2.6.4)
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
   - Koloda (4.3.1):
     - pop (~> 1.0)
   - pop (1.0.10)
 
 DEPENDENCIES:
+  - AWSCognito
+  - AWSDynamoDB
+  - Charts
   - Koloda (= 4.3.1)
 
 SPEC CHECKSUMS:
+  AWSCognito: 730f6795c78817ff86701844fb22ca40d129494b
+  AWSCore: f5611be1c3edc38dbf9d6da0a5d2b6c4841d1c05
+  AWSDynamoDB: 3edc327d45883810fc0d7881398c97add2577f89
+  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
   Koloda: 0d39b2aa188ccd1fac48d752acaf9802e683c625
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
 
-PODFILE CHECKSUM: 3ceaefbe5054eaa0eb0c680edb5248c114f650da
+PODFILE CHECKSUM: 14aa078a73139fc3c899205c5b89aace6497d08f
 
 COCOAPODS: 1.3.1
