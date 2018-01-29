@@ -1,4 +1,5 @@
-import pysal
+import geopandas as gpd
+import shapely
 import os
 import sqlite3
 import json
@@ -10,9 +11,8 @@ data_path = os.getcwd() + "/ShapeFiles/cb_2016_us_cd115_500k.dbf"
 json_path = os.getcwd() + "/states.json"
 demographics_folder_path = os.getcwd() + "/DemographicsData/"
 
-# Using pysal for parsing
-data = pysal.open(data_path)
-shapes = pysal.open(shape_path)
+# Using geopandas for parsing
+data = gpd.read_file(data_path)
 
 # Load fips codes
 j_file = open(json_path, "r")
@@ -25,9 +25,9 @@ districts = []
 i = 0
 
 # batches into an array
-for dist in data:
-    state_id = str(int(dist[0]))
-    district_number = int(dist[1])
+for _, dist in data.iterrows():
+    state_id = str(int(dist["STATEFP"]))
+    district_number = int(dist["CD115FP"])
 
     # if name not in fips database, exclude
     if state_id not in fips_codes:
@@ -83,12 +83,24 @@ for dist in data:
     except IOError:
         continue
 
-    coords = ""
-    for vertex in shapes[i].vertices:
-        # pysal oddly does long, lat; we want lat, long
-        coords += "{},{} ".format(vertex[1], vertex[0])
 
-    districts.append((i, name, district_number, coords.strip(), people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1]))
+    shapes = []
+    geometry = dist["geometry"]
+    if type(geometry) is shapely.geometry.polygon.Polygon:
+        shapes.append(geometry)
+    else:
+        shapes.extend((x for x in geometry))
+
+    coords = []
+    for shape in shapes:
+        cstr = ""
+        for vert in shape.exterior.coords:
+            cstr += "{},{} ".format(vert[0], vert[1])
+
+        coords.append(cstr.strip())
+
+    coords_str = "|".join(coords)
+    districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1]))
 
     i += 1
 
