@@ -14,7 +14,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
 
     var currentDistrict: District?
     var selectedSection: Int? = nil
-    var overlay: MKPolygon?
+    var overlays: [MKPolygon]?
     var region: MKCoordinateRegion?
     
     var educationDataPoints = [PieChartDataEntry]()
@@ -129,8 +129,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
         case 0:
             let map = cell.contentView.subviews[0] as! MKMapView
             map.delegate = self
-            if let _ = overlay{
-                map.add(overlay!)
+            if let _ = overlays{
+                map.addOverlays(overlays!)
             }
             if let _ = region{
                 map.setRegion(region!, animated: false)

@@ -20,7 +20,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var cardView = Bundle.main.loadNibNamed("CardView", owner: nil, options: nil)![0] as! UIView
     var district: District?
     
-    var polygon: MKPolygon?
+    var polygons = [MKPolygon]()
     var region: MKCoordinateRegion?
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent}
@@ -100,53 +100,53 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         let barView = cardView.viewWithTag(1)!
         let label = barView.viewWithTag(2) as! UILabel
         
-        var mapPoints = [MKMapPoint]()
         
         var minX = Double.infinity
         var minY = Double.infinity
         var spanX = 0.0
         var spanY = -0.0
         
-        for location in district.coordinates{
-            
-            let mp = MKMapPointForCoordinate(location.coordinate)
-            mapPoints.append(mp)
-            
-            if mp.x < minX{
-                if spanX != 0.0{
-                    spanX = spanX + minX - mp.x
-                }
-                minX = mp.x
-            }
-            if mp.y < minY{
-                if spanY != 0.0{
-                    spanY = spanY + minY - mp.y
-                }
-                
-                minY = mp.y
-            }
-            if mp.y - minY > spanY{
-                spanY = mp.y - minY
-            }
-            if mp.x - minX > spanX{
-                spanX = mp.x - minX
-            }
-            
+        if self.polygons.count > 0{
+            map.removeOverlays(self.polygons)
+            self.polygons.removeAll()
         }
         
         let tile = MKTileOverlay(urlTemplate: nil)
         tile.canReplaceMapContent = true
         map.add(tile)
         
-        let overlay = MKPolygon(points: mapPoints, count: mapPoints.count)
-        
-        if let _ = polygon{
-            map.remove(polygon!)
+        for shape in district.coordinates{
+            var mapPoints = [MKMapPoint]()
+            for location in shape{
+                
+                let mp = MKMapPointForCoordinate(location.coordinate)
+                mapPoints.append(mp)
+                
+                if mp.x < minX{
+                    if spanX != 0.0{
+                        spanX = spanX + minX - mp.x
+                    }
+                    minX = mp.x
+                }
+                if mp.y < minY{
+                    if spanY != 0.0{
+                        spanY = spanY + minY - mp.y
+                    }
+                    
+                    minY = mp.y
+                }
+                if mp.y - minY > spanY{
+                    spanY = mp.y - minY
+                }
+                if mp.x - minX > spanX{
+                    spanX = mp.x - minX
+                }
+                
+            }
+            let overlay = MKPolygon(points: mapPoints, count: mapPoints.count)
+            map.add(overlay)
+            self.polygons.append(overlay)
         }
-        
-        polygon = overlay
-        
-        map.add(overlay)
         
         region = MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY))
         map.setRegion(region!, animated: false)
@@ -179,7 +179,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         if segue.identifier == "showInfo"{
             let dest = ((segue.destination as! UINavigationController).viewControllers[0] as! InfoTableViewController)
             dest.currentDistrict = district
-            dest.overlay = polygon
+            dest.overlays = polygons
             dest.region = region
         }
     }

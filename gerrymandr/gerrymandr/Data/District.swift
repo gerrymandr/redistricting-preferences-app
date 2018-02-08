@@ -12,7 +12,7 @@ class District {
     var id: Int
     var state: String
     var districtNumber: Int
-    var coordinates: [CLLocation]
+    var coordinates: [[CLLocation]]
     var numPeople: Int
     var numHispanic: Int
     var medAge: Double
@@ -30,7 +30,7 @@ class District {
     var startedViewing = Date()
     var stoppedViewing: Date?
     
-    init(id: Int, state: String, districtNumber: Int, coordinates: [CLLocation], numPeople: Int, numHispanic: Int, medAge: Double, medIncome: Double, race: [Double], education: [Double]){
+    init(id: Int, state: String, districtNumber: Int, coordinates: [[CLLocation]], numPeople: Int, numHispanic: Int, medAge: Double, medIncome: Double, race: [Double], education: [Double]){
         self.id = id
         self.state = state
         self.districtNumber = districtNumber

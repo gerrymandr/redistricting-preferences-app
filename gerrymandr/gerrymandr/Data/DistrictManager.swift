@@ -76,15 +76,18 @@ class DistrictManager {
         
         sqlite3_finalize(queryStatement)
         
-        var coords = [CLLocation]()
+        var coords = [[CLLocation]]()
         var education = [Double]()
         var race = [Double]()
         
-        for pair in coordString.split(separator: " "){
-            let split = pair.split(separator: ",")
-            coords.append(CLLocation(latitude: Double(split[0])!, longitude: Double(split[1])!))
+        for district in coordString.split(separator: "|"){
+            var tarray = [CLLocation]()
+            for pair in district.split(separator: " "){
+                let split = pair.split(separator: ",")
+                tarray.append(CLLocation(latitude: Double(split[1])!, longitude: Double(split[0])!))
+            }
+            coords.append(tarray)
         }
-        
         for raceNum in raceString.split(separator: ","){
             race.append(Double(raceNum)!)
         }
