@@ -13,11 +13,14 @@ def get_polygons(geometry):
         return [shape for shape in geometry]
 
 def check_adjacency(polygons_1, polygons_2):
+    max_area = -1
+    cur_cent = None
     for p1, p2 in itertools.product(polygons_1, polygons_2):
         if p1.intersects(p2):
-            return p2.centroid
-
-    return None
+            if p2.area > max_area:
+                cur_cent = p2.centroid
+                max_area = p2.area
+    return cur_cent
 
 # Gets path for resources
 shape_path = os.getcwd() + "/ShapeFiles/cb_2016_us_cd115_500k.shp"
@@ -99,7 +102,7 @@ for _, dist in data.iterrows():
 
     geometry = dist.geometry
     shapes = get_polygons(geometry)
-    centroid = sorted(shapes, key=lambda x: x.area)[0].centroid
+    centroid = sorted(shapes, key=lambda x: x.area)[-1].centroid
     links = []
 
     for _, d2 in data.iterrows():
