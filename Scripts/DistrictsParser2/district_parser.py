@@ -4,6 +4,20 @@ import os
 import sqlite3
 import json
 import csv
+import itertools
+
+def get_polygons(geometry):
+    if type(geometry) is shapely.geometry.polygon.Polygon:
+        return [geometry]
+    else:
+        return [shape for shape in geometry]
+
+def check_adjacency(polygons_1, polygons_2):
+    for p1, p2 in itertools.product(polygons_1, polygons_2):
+        if p1.intersects(p2):
+            return p2.centroid
+
+    return None
 
 # Gets path for resources
 shape_path = os.getcwd() + "/ShapeFiles/cb_2016_us_cd115_500k.shp"
@@ -83,13 +97,29 @@ for _, dist in data.iterrows():
     except IOError:
         continue
 
+    geometry = dist.geometry
+    shapes = get_polygons(geometry)
+    centroid = sorted(shapes, key=lambda x: x.area)[0].centroid
+    links = []
 
-    shapes = []
-    geometry = dist["geometry"]
-    if type(geometry) is shapely.geometry.polygon.Polygon:
-        shapes.append(geometry)
-    else:
-        shapes.extend((x for x in geometry))
+    for _, d2 in data.iterrows():
+        if not dist.equals(d2):
+            new_geo = d2.geometry
+            new_shapes = get_polygons(new_geo)
+
+            adjacent_centroid = check_adjacency(shapes, new_shapes)
+
+            if adjacent_centroid is not None:
+                links.append(adjacent_centroid)
+
+    cent_string = "{},{}".format(centroid.coords.xy[0][0], centroid.coords.xy[1][0])
+
+    adj_cent_str = ""
+
+    for adj_cent in links:
+        adj_cent_str += "{},{} ".format(adj_cent.coords.xy[0][0], adj_cent.coords.xy[1][0])
+
+    adj_cent_str = adj_cent_str.strip()
 
     coords = []
     for shape in shapes:
@@ -100,7 +130,7 @@ for _, dist in data.iterrows():
         coords.append(cstr.strip())
 
     coords_str = "|".join(coords)
-    districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1]))
+    districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1], cent_string, adj_cent_str))
 
     i += 1
 
@@ -119,13 +149,15 @@ curs = conn.cursor()
 # medincome - REAL: median income
 # race - STRING: comma separated in following order White, A.A, A.I., Asian, N.H.
 # education - STRING: comma separated in following order <HS, HS, Some College, 2 yr, 4 yr, Grad
+# centroid - STRING: the current district's centroid
+# adjcentroid - STRING: comma separated vertices of the centroids of adjacent disticts
 
 
 create_statement = ("CREATE TABLE districts (id INTEGER PRIMARY KEY, state INTEGER, number INTEGER, " +
                    "coordinates STRING, people INTEGER, hispanic INTEGER, medage REAL, medincome REAL, " +
-                   "race STRING, education STRING)")
+                   "race STRING, education STRING, centroid STRING, adjcentroid STRING)")
 curs.execute(create_statement)
-curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", districts)
+curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", districts)
 
 conn.commit()
 conn.close()
