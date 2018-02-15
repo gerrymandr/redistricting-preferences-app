@@ -341,8 +341,27 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Full Map" rowHeight="300" id="kqS-Vx-CfS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Adjacency" rowHeight="300" id="xyt-mX-y32">
                                 <rect key="frame" x="0.0" y="655.5" width="375" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xyt-mX-y32" id="NWW-yG-LE3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9tc-wp-vqm">
+                                            <rect key="frame" x="16" y="11" width="343" height="278"/>
+                                        </mapView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="9tc-wp-vqm" firstAttribute="leading" secondItem="NWW-yG-LE3" secondAttribute="leadingMargin" id="LiH-AZ-buU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="9tc-wp-vqm" secondAttribute="trailing" id="M9G-Ne-LDi"/>
+                                        <constraint firstItem="9tc-wp-vqm" firstAttribute="top" secondItem="NWW-yG-LE3" secondAttribute="topMargin" id="pQh-9j-ZPh"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9tc-wp-vqm" secondAttribute="bottom" id="wg4-U6-QQf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Full Map" rowHeight="300" id="kqS-Vx-CfS">
+                                <rect key="frame" x="0.0" y="955.5" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kqS-Vx-CfS" id="mwk-sH-HS4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>

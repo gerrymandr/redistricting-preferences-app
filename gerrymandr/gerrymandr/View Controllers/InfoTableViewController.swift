@@ -20,9 +20,10 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     var educationDataPoints = [PieChartDataEntry]()
     var raceDataPoints = [PieChartDataEntry]()
     
-    let sections = ["Full Map", "Demographics", "Income", "Race", "Education"]
+    let sections = ["Full Map", "Adjacency", "Demographics", "Income", "Race", "Education"]
     let themeColor = UIColor(red: 88.0/256, green: 186.0/256, blue: 157.0/256, alpha: 1.0)
     let fillColor = UIColor(red: 88.0/256, green: 186.0/256, blue: 157.0/256, alpha: 0.5)
+    let lineColor = UIColor(red: 244.0/256, green: 67.0/256, blue: 54.0/256, alpha: 1.0)
     let lineThickness: CGFloat = 1.0
     let raceLegend = ["White", "African American", "American Indian", "Asian", "Native Hawaiian"]
     let educationLegend = ["< HS", "HS", "Some College", "Associates", "Bachelors", "Grad"]
@@ -59,7 +60,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +83,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0{
+        if indexPath.section <= 1{
             return 300
         }
         return 150
@@ -135,8 +136,48 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             if let _ = region{
                 map.setRegion(region!, animated: false)
             }
-            
         case 1:
+            let map = cell.contentView.subviews[0] as! MKMapView
+            map.delegate = self
+            if let _ = overlays{
+                map.addOverlays(overlays!)
+            }
+            var minX = Double.infinity
+            var minY = Double.infinity
+            var spanX = 0.0
+            var spanY = -0.0
+            let curCentroid = MKMapPointForCoordinate(currentDistrict!.centroid.coordinate)
+            
+            for adjCent in currentDistrict!.adjCentroids{
+                let mp = MKMapPointForCoordinate(adjCent.coordinate)
+                
+                if mp.x < minX{
+                    if spanX != 0.0{
+                        spanX = spanX + minX - mp.x
+                    }
+                    minX = mp.x
+                }
+                if mp.y < minY{
+                    if spanY != 0.0{
+                        spanY = spanY + minY - mp.y
+                    }
+                    
+                    minY = mp.y
+                }
+                if mp.y - minY > spanY{
+                    spanY = mp.y - minY
+                }
+                if mp.x - minX > spanX{
+                    spanX = mp.x - minX
+                }
+                
+                map.add(MKPolyline(points: [curCentroid, mp], count: 2))
+                
+                region = MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY))
+                map.setRegion(region!, animated: false)
+                
+            }
+        case 2:
             let stack = cell.contentView.subviews[0] as! UIStackView
             let popLabel = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
             let ageLabel = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
@@ -148,7 +189,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             popLabel.text = numFormat.string(from: NSNumber(value: currentDistrict!.numPeople))
             ageLabel.text = String(currentDistrict!.medAge)
             
-        case 2:
+        case 3:
             let label = cell.contentView.viewWithTag(2) as! UILabel
             
             let numFormat = NumberFormatter()
@@ -157,7 +198,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             
             label.text = numFormat.string(from: NSNumber(value: currentDistrict!.medIncome))
             
-        case 3:
+        case 4:
             let stack = cell.contentView.subviews[0] as! UIStackView
             let chart = stack.arrangedSubviews[0] as! PieChartView
             let label = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
@@ -179,7 +220,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 chart.usePercentValuesEnabled = true
                 chart.notifyDataSetChanged()
             }
-        case 4:
+        case 5:
             let chart = cell.contentView.subviews[0] as! PieChartView
             if chart.data == nil{
                 let dset = PieChartDataSet(values: educationDataPoints, label: nil)
@@ -219,7 +260,13 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             
             return renderer
         }
-        
+        else if let line = overlay as? MKPolyline{
+            let renderer = MKPolylineRenderer(overlay: line)
+            renderer.strokeColor = lineColor
+            renderer.lineWidth = lineThickness
+            
+            return renderer
+        }
         return MKOverlayRenderer(overlay: overlay)
     }
 }

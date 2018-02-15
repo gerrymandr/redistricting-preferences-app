@@ -73,12 +73,23 @@ class DistrictManager {
         let medIncome = Double(sqlite3_column_double(queryStatement, 7))
         let raceString = String(cString: sqlite3_column_text(queryStatement, 8))
         let educationString = String(cString: sqlite3_column_text(queryStatement, 9))
+        let centroidString = String(cString: sqlite3_column_text(queryStatement, 10))
+        let adjacentCentroidString = String(cString: sqlite3_column_text(queryStatement, 11))
         
         sqlite3_finalize(queryStatement)
         
         var coords = [[CLLocation]]()
+        var adjCentroids = [CLLocation]()
         var education = [Double]()
         var race = [Double]()
+        
+        let splitCentroid = centroidString.split(separator: ",")
+        let centroid = CLLocation(latitude: Double(splitCentroid[1])!, longitude: Double(splitCentroid[0])!)
+        
+        for adjCent in adjacentCentroidString.split(separator: " "){
+            let splitAdjCent = adjCent.split(separator: ",")
+            adjCentroids.append(CLLocation(latitude: Double(splitAdjCent[1])!, longitude: Double(splitAdjCent[0])!))
+        }
         
         for district in coordString.split(separator: "|"){
             var tarray = [CLLocation]()
@@ -95,7 +106,7 @@ class DistrictManager {
             education.append(Double(edNum)!)
         }
         
-        return District(id: id, state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education)
+        return District(id: id, state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education, centroid: centroid, adjCentroids: adjCentroids)
     }
 
     

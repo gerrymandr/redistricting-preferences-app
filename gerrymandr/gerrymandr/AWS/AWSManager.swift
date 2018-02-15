@@ -74,17 +74,19 @@ class AWSManager{
         let viewedRace = AWSDynamoDBAttributeValue()
         let viewedIncome = AWSDynamoDBAttributeValue()
         let viewedEd = AWSDynamoDBAttributeValue()
+        let viewedGraph = AWSDynamoDBAttributeValue()
         
         fair?.boolean = district.fair as NSNumber
         timeToDecide?.n = String(district.stoppedViewing!.timeIntervalSince(district.startedViewing))
         viewedMap?.boolean = district.viewedStats[0] as NSNumber
-        viewedDemos?.boolean = district.viewedStats[1] as NSNumber
-        viewedRace?.boolean = district.viewedStats[2] as NSNumber
-        viewedIncome?.boolean = district.viewedStats[3] as NSNumber
-        viewedEd?.boolean = district.viewedStats[4] as NSNumber
+        viewedGraph?.boolean = district.viewedStats[1] as NSNumber
+        viewedDemos?.boolean = district.viewedStats[2] as NSNumber
+        viewedRace?.boolean = district.viewedStats[3] as NSNumber
+        viewedIncome?.boolean = district.viewedStats[4] as NSNumber
+        viewedEd?.boolean = district.viewedStats[5] as NSNumber
 
         let value = AWSDynamoDBAttributeValue()
-        value?.m = ["fair": fair!, "timeToDecide": timeToDecide!, "viewedMap": viewedMap!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
+        value?.m = ["fair": fair!, "timeToDecide": timeToDecide!, "viewedMap": viewedMap!, "viewedGraph": viewedGraph!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
         
         let valueUpdate = AWSDynamoDBAttributeValueUpdate()
         valueUpdate?.value = value

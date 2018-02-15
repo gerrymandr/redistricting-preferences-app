@@ -17,6 +17,8 @@ class District {
     var numHispanic: Int
     var medAge: Double
     var medIncome: Double
+    var centroid: CLLocation
+    var adjCentroids: [CLLocation]
     
     // White, A.A, A.I., Asian, N.H.
     var race: [Double]
@@ -24,13 +26,13 @@ class District {
     // <HS, HS, Some College, 2 yr, 4 yr, Grad
     var education: [Double]
     
-    // Full map, demographics, race, income, education, graph (to be added)
+    // Full map, graph, demographics, race, income, education (to be added)
     var viewedStats = Array(repeating: false, count: 6)
     var fair = false
     var startedViewing = Date()
     var stoppedViewing: Date?
     
-    init(id: Int, state: String, districtNumber: Int, coordinates: [[CLLocation]], numPeople: Int, numHispanic: Int, medAge: Double, medIncome: Double, race: [Double], education: [Double]){
+    init(id: Int, state: String, districtNumber: Int, coordinates: [[CLLocation]], numPeople: Int, numHispanic: Int, medAge: Double, medIncome: Double, race: [Double], education: [Double], centroid: CLLocation, adjCentroids: [CLLocation]){
         self.id = id
         self.state = state
         self.districtNumber = districtNumber
@@ -41,5 +43,8 @@ class District {
         self.medIncome = medIncome
         self.race = race
         self.education = education
+        self.centroid = centroid
+        self.adjCentroids = adjCentroids
+        
     }
 }
