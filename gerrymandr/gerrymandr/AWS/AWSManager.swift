@@ -66,6 +66,10 @@ class AWSManager{
         update?.tableName = "GerrymandrResponses"
         update?.key = ["userID": userID!]
         
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .short
+        dFormatter.timeStyle = .full
+        
         // Setup update parameters
         let fair = AWSDynamoDBAttributeValue()
         let timeToDecide = AWSDynamoDBAttributeValue()
@@ -75,6 +79,7 @@ class AWSManager{
         let viewedIncome = AWSDynamoDBAttributeValue()
         let viewedEd = AWSDynamoDBAttributeValue()
         let viewedGraph = AWSDynamoDBAttributeValue()
+        let timestamp = AWSDynamoDBAttributeValue()
         
         fair?.boolean = district.fair as NSNumber
         timeToDecide?.n = String(district.stoppedViewing!.timeIntervalSince(district.startedViewing))
@@ -84,9 +89,10 @@ class AWSManager{
         viewedRace?.boolean = district.viewedStats[3] as NSNumber
         viewedIncome?.boolean = district.viewedStats[4] as NSNumber
         viewedEd?.boolean = district.viewedStats[5] as NSNumber
-
+        timestamp?.s = dFormatter.string(from: Date())
+        
         let value = AWSDynamoDBAttributeValue()
-        value?.m = ["fair": fair!, "timeToDecide": timeToDecide!, "viewedMap": viewedMap!, "viewedGraph": viewedGraph!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
+        value?.m = ["timestamp": timestamp!,"fair": fair!, "timeToDecide": timeToDecide!, "viewedMap": viewedMap!, "viewedGraph": viewedGraph!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
         
         let valueUpdate = AWSDynamoDBAttributeValueUpdate()
         valueUpdate?.value = value
