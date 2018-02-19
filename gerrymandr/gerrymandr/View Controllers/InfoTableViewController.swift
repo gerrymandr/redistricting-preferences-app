@@ -127,6 +127,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let cell = tableView.dequeueReusableCell(withIdentifier: sections[section])!
+        cell.selectionStyle = .none
         
         switch section {
         case 0:
