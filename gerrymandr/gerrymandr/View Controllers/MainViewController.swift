@@ -21,7 +21,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var district: District?
     
     var polygons = [MKPolygon]()
-    var region: MKCoordinateRegion?
+    var region: MKMapRect?
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent}
     
@@ -148,8 +148,8 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             self.polygons.append(overlay)
         }
         
-        region = MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY))
-        map.setRegion(region!, animated: false)
+        region = MKMapRectMake(minX, minY, spanX, spanY)
+        map.setVisibleMapRect(region!, edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
         
         label.text = "Mystery District #" + String(district.id)
     }

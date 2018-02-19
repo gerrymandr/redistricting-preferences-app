@@ -42,7 +42,7 @@ districts = []
 i = 0
 
 # batches into an array
-for _, dist in data.iterrows():
+for i, dist in data.iterrows():
     state_id = str(int(dist["STATEFP"]))
     district_number = int(dist["CD115FP"])
 
@@ -104,8 +104,9 @@ for _, dist in data.iterrows():
     shapes = get_polygons(geometry)
     centroid = sorted(shapes, key=lambda x: x.area)[-1].centroid
     links = []
+    adj_districts = []
 
-    for _, d2 in data.iterrows():
+    for index, d2 in data.iterrows():
         if not dist.equals(d2):
             new_geo = d2.geometry
             new_shapes = get_polygons(new_geo)
@@ -114,6 +115,7 @@ for _, dist in data.iterrows():
 
             if adjacent_centroid is not None:
                 links.append(adjacent_centroid)
+                adj_districts.append(str(index))
 
     cent_string = "{},{}".format(centroid.coords.xy[0][0], centroid.coords.xy[1][0])
 
@@ -132,10 +134,11 @@ for _, dist in data.iterrows():
 
         coords.append(cstr.strip())
 
-    coords_str = "|".join(coords)
-    districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1], cent_string, adj_cent_str))
+    adj_dist_str = ",".join(adj_districts)
 
-    i += 1
+    coords_str = "|".join(coords)
+    districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1], cent_string, adj_cent_str, adj_dist_str))
+
 
 # opens a connection; probably should check to see if it already exists...
 conn = sqlite3.connect("districts.sql")
@@ -154,13 +157,14 @@ curs = conn.cursor()
 # education - STRING: comma separated in following order <HS, HS, Some College, 2 yr, 4 yr, Grad
 # centroid - STRING: the current district's centroid
 # adjcentroid - STRING: comma separated vertices of the centroids of adjacent disticts
+# adjdists - STRING: comma separated list of adjacent districts
 
 
 create_statement = ("CREATE TABLE districts (id INTEGER PRIMARY KEY, state INTEGER, number INTEGER, " +
                    "coordinates STRING, people INTEGER, hispanic INTEGER, medage REAL, medincome REAL, " +
-                   "race STRING, education STRING, centroid STRING, adjcentroid STRING)")
+                   "race STRING, education STRING, centroid STRING, adjcentroid STRING, adjdists STRING)")
 curs.execute(create_statement)
-curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", districts)
+curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", districts)
 
 conn.commit()
 conn.close()

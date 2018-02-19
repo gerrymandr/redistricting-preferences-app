@@ -38,8 +38,10 @@ class DistrictManager {
     }
     
     func getRandomDistrict() -> District?{
-        let i = Int32(arc4random_uniform(UInt32(districtCount)))
-        
+        return getDistrict(id: Int32(arc4random_uniform(UInt32(districtCount))))
+    }
+    
+    func getDistrict(id: Int32) -> District?{
         let selectSQL = "SELECT * FROM districts WHERE id == ?"
         var queryStatement: OpaquePointer? = nil
         
@@ -53,7 +55,7 @@ class DistrictManager {
             return nil
         }
         
-        guard sqlite3_bind_int(queryStatement, 1, i) == SQLITE_OK else {
+        guard sqlite3_bind_int(queryStatement, 1, id) == SQLITE_OK else {
             NSLog("Unable to bind random number.")
             return nil
         }
@@ -75,6 +77,7 @@ class DistrictManager {
         let educationString = String(cString: sqlite3_column_text(queryStatement, 9))
         let centroidString = String(cString: sqlite3_column_text(queryStatement, 10))
         let adjacentCentroidString = String(cString: sqlite3_column_text(queryStatement, 11))
+        let adjacentDistrictsString = String(cString: sqlite3_column_text(queryStatement, 12))
         
         sqlite3_finalize(queryStatement)
         
@@ -82,6 +85,7 @@ class DistrictManager {
         var adjCentroids = [CLLocation]()
         var education = [Double]()
         var race = [Double]()
+        var adjDistricts = [Int32]()
         
         let splitCentroid = centroidString.split(separator: ",")
         let centroid = CLLocation(latitude: Double(splitCentroid[1])!, longitude: Double(splitCentroid[0])!)
@@ -105,8 +109,11 @@ class DistrictManager {
         for edNum in educationString.split(separator: ","){
             education.append(Double(edNum)!)
         }
+        for dNum in adjacentDistrictsString.split(separator: ","){
+            adjDistricts.append(Int32(dNum)!)
+        }
         
-        return District(id: id, state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education, centroid: centroid, adjCentroids: adjCentroids)
+        return District(id: id, state: state, districtNumber: district, coordinates: coords, numPeople: numPeople, numHispanic: numHispanic, medAge: medAge, medIncome: medIncome, race: race, education: education, centroid: centroid, adjCentroids: adjCentroids, adjDistricts: adjDistricts)
     }
 
     

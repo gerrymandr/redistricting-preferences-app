@@ -15,15 +15,17 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     var currentDistrict: District?
     var selectedSection: Int? = nil
     var overlays: [MKPolygon]?
-    var region: MKCoordinateRegion?
+    var region: MKMapRect?
     
     var educationDataPoints = [PieChartDataEntry]()
     var raceDataPoints = [PieChartDataEntry]()
     
+    let distMan = DistrictManager.sharedInstance
     let sections = ["Full Map", "Adjacency", "Demographics", "Income", "Race", "Education"]
     let themeColor = UIColor(red: 88.0/256, green: 186.0/256, blue: 157.0/256, alpha: 1.0)
     let fillColor = UIColor(red: 88.0/256, green: 186.0/256, blue: 157.0/256, alpha: 0.5)
     let lineColor = UIColor(red: 244.0/256, green: 67.0/256, blue: 54.0/256, alpha: 1.0)
+    let adjFill = UIColor(red: 244.0/256, green: 67.0/256, blue: 54.0/256, alpha: 0.5)
     let lineThickness: CGFloat = 1.0
     let raceLegend = ["White", "African American", "American Indian", "Asian", "Native Hawaiian"]
     let educationLegend = ["< HS", "HS", "Some College", "Associates", "Bachelors", "Grad"]
@@ -134,49 +136,61 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 map.addOverlays(overlays!)
             }
             if let _ = region{
-                map.setRegion(region!, animated: false)
+                map.setVisibleMapRect(region!, edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
             }
         case 1:
             let map = cell.contentView.subviews[0] as! MKMapView
             map.delegate = self
-            if let _ = overlays{
-                map.addOverlays(overlays!)
-            }
             var minX = Double.infinity
             var minY = Double.infinity
             var spanX = 0.0
             var spanY = -0.0
             let curCentroid = MKMapPointForCoordinate(currentDistrict!.centroid.coordinate)
             
+            
+            map.addOverlays(overlays!)
+            
+            for adjDist in currentDistrict!.adjDistricts{
+                for shape in distMan.getDistrict(id: adjDist)!.coordinates{
+                    var mapPoints = [MKMapPoint]()
+                    for location in shape{
+                        
+                        let mp = MKMapPointForCoordinate(location.coordinate)
+                        mapPoints.append(mp)
+                        
+                        if mp.x < minX{
+                            if spanX != 0.0{
+                                spanX = spanX + minX - mp.x
+                            }
+                            minX = mp.x
+                        }
+                        if mp.y < minY{
+                            if spanY != 0.0{
+                                spanY = spanY + minY - mp.y
+                            }
+                            
+                            minY = mp.y
+                        }
+                        if mp.y - minY > spanY{
+                            spanY = mp.y - minY
+                        }
+                        if mp.x - minX > spanX{
+                            spanX = mp.x - minX
+                        }
+                        
+                    }
+                    let overlay = MKPolygon(points: mapPoints, count: mapPoints.count)
+                    map.add(overlay)
+                }
+            }
+            
+            map.setVisibleMapRect(MKMapRectMake(minX, minY, spanX, spanY), edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
+            
             for adjCent in currentDistrict!.adjCentroids{
                 let mp = MKMapPointForCoordinate(adjCent.coordinate)
-                
-                if mp.x < minX{
-                    if spanX != 0.0{
-                        spanX = spanX + minX - mp.x
-                    }
-                    minX = mp.x
-                }
-                if mp.y < minY{
-                    if spanY != 0.0{
-                        spanY = spanY + minY - mp.y
-                    }
-                    
-                    minY = mp.y
-                }
-                if mp.y - minY > spanY{
-                    spanY = mp.y - minY
-                }
-                if mp.x - minX > spanX{
-                    spanX = mp.x - minX
-                }
-                
                 map.add(MKPolyline(points: [curCentroid, mp], count: 2))
-                
-                region = MKCoordinateRegionForMapRect(MKMapRectMake(minX, minY, spanX, spanY))
-                map.setRegion(region!, animated: false)
-                
             }
+
         case 2:
             let stack = cell.contentView.subviews[0] as! UIStackView
             let popLabel = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
@@ -252,17 +266,26 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         if let polygon = overlay as? MKPolygon{
-            
-            let renderer = MKPolygonRenderer(polygon: polygon)
-            renderer.strokeColor = themeColor
-            renderer.lineWidth = lineThickness
-            renderer.fillColor = fillColor
-            
-            return renderer
+            if self.overlays!.contains(polygon){
+                let renderer = MKPolygonRenderer(polygon: polygon)
+                renderer.strokeColor = themeColor
+                renderer.lineWidth = lineThickness
+                renderer.fillColor = fillColor
+                
+                return renderer
+            }
+            else{
+                let renderer = MKPolygonRenderer(polygon: polygon)
+                renderer.strokeColor = lineColor
+                renderer.lineWidth = 0.5*lineThickness
+                renderer.fillColor = adjFill
+                
+                return renderer
+            }
         }
         else if let line = overlay as? MKPolyline{
             let renderer = MKPolylineRenderer(overlay: line)
-            renderer.strokeColor = lineColor
+            renderer.strokeColor = UIColor.white
             renderer.lineWidth = lineThickness
             
             return renderer
