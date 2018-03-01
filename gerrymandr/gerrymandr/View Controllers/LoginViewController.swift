@@ -27,15 +27,10 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
         self.view.addSubview(pageViewController.view)
         
         self.view.sendSubview(toBack: pageViewController.view)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if manager.isAuthenticated{
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("LoggedIn"), object: nil, queue: nil){
+            [unowned self] note in
             self.performSegue(withIdentifier: "loginCompleted", sender: nil)
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

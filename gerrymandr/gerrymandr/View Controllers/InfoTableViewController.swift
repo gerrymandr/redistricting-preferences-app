@@ -49,7 +49,16 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             }
             i = 0
             for racePoint in district.race{
-                raceDataPoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
+                
+                if raceLegend[i] == "White"{
+                    raceDataPoints.append(PieChartDataEntry(value: Double(racePoint - Double(currentDistrict!.numHispanic)), label: raceLegend[i]))
+                    raceDataPoints.append(PieChartDataEntry(value: Double(currentDistrict!.numHispanic), label:
+                    "Hispanic"))
+                }
+                else{
+                    raceDataPoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
+                }
+                
                 i = i + 1
             }
         }
@@ -216,13 +225,6 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
         case 4:
             let stack = cell.contentView.subviews[0] as! UIStackView
             let chart = stack.arrangedSubviews[0] as! PieChartView
-            let label = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
-            
-            let numFormat = NumberFormatter()
-            numFormat.numberStyle = .decimal
-            numFormat.usesGroupingSeparator = true
-            
-            label.text = numFormat.string(from: NSNumber(value: currentDistrict!.numHispanic))
             
             if chart.data == nil{
                 let dset = PieChartDataSet(values: raceDataPoints, label: nil)
@@ -278,7 +280,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             else{
                 let renderer = MKPolygonRenderer(polygon: polygon)
                 renderer.strokeColor = lineColor
-                renderer.lineWidth = 0.5*lineThickness
+                renderer.lineWidth = lineThickness
                 renderer.fillColor = adjFill
                 
                 return renderer

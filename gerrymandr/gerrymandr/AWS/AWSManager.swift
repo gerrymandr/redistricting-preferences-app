@@ -30,8 +30,25 @@ class AWSManager{
         // Automatically gets AWS credentials when FB authentication is complete
         NotificationCenter.default.addObserver(forName: NSNotification.Name.FBSDKAccessTokenDidChange, object: nil, queue: nil) {
             [unowned self] note in
+            self.facebookTokenChange()
+        }
+    }
+    
+    func facebookTokenChange(){
+        if let _ = FBSDKAccessToken.current(){
             self.setupAWS()
         }
+        else{
+            credProvider.clearKeychain()
+            credProvider.clearCredentials()
+            self.id = nil
+            self.isAuthenticated = false
+            self.dynamoDB = nil
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("LoggedOut"), object: nil)
+            }
+        }
+
     }
     
     func setupAWS(){
@@ -44,6 +61,10 @@ class AWSManager{
                 self.dynamoDB = AWSDynamoDB.default()
                 self.isAuthenticated = true
             }
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("LoggedIn"), object: nil)
+            }
+            
             return task
         })
     }

@@ -45,7 +45,10 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         kolodaView.dataSource = self
         kolodaView.delegate = self
                 
-        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("LoggedOut"), object: nil, queue: nil){
+            note in
+            UIApplication.shared.keyWindow!.rootViewController!.dismiss(animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
