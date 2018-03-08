@@ -154,7 +154,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         region = MKMapRectMake(minX, minY, spanX, spanY)
         map.setVisibleMapRect(region!, edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
         
-        label.text = "Mystery District #" + String(district.id)
+        label.text = "District ??"
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

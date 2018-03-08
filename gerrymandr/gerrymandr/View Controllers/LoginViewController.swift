@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
     let manager = AWSManager.sharedInstance
     let headers = ["Evaluate the fairness of districts.", "Swipe right if fair, left if not.", "View a full map.", "Get demographic information."]
     let images = ["photo1", "photo2", "photo3", "photo4"]
+    var loggedIn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,18 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
         self.view.sendSubview(toBack: pageViewController.view)
         NotificationCenter.default.addObserver(forName: NSNotification.Name("LoggedIn"), object: nil, queue: nil){
             [unowned self] note in
-            self.performSegue(withIdentifier: "loginCompleted", sender: nil)
+            self.loggedIn = true
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.loggedIn{
+            self.performSegue(withIdentifier: "loginCompleted", sender: nil)
+            self.loggedIn = false
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

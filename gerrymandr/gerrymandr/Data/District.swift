@@ -29,7 +29,7 @@ class District {
     var education: [Double]
     
     // Full map, graph, demographics, race, income, education (to be added)
-    var viewedStats = Array(repeating: false, count: 6)
+    var viewedStats = Array(repeating: false, count: 7)
     var fair = false
     var startedViewing = Date()
     var stoppedViewing: Date?

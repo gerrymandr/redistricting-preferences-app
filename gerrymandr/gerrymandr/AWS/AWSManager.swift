@@ -94,6 +94,7 @@ class AWSManager{
         // Setup update parameters
         let fair = AWSDynamoDBAttributeValue()
         let timeToDecide = AWSDynamoDBAttributeValue()
+        let viewedName = AWSDynamoDBAttributeValue()
         let viewedMap = AWSDynamoDBAttributeValue()
         let viewedDemos = AWSDynamoDBAttributeValue()
         let viewedRace = AWSDynamoDBAttributeValue()
@@ -104,16 +105,17 @@ class AWSManager{
         
         fair?.boolean = district.fair as NSNumber
         timeToDecide?.n = String(district.stoppedViewing!.timeIntervalSince(district.startedViewing))
-        viewedMap?.boolean = district.viewedStats[0] as NSNumber
-        viewedGraph?.boolean = district.viewedStats[1] as NSNumber
-        viewedDemos?.boolean = district.viewedStats[2] as NSNumber
-        viewedRace?.boolean = district.viewedStats[3] as NSNumber
-        viewedIncome?.boolean = district.viewedStats[4] as NSNumber
-        viewedEd?.boolean = district.viewedStats[5] as NSNumber
+        viewedName?.boolean = district.viewedStats[0] as NSNumber
+        viewedMap?.boolean = district.viewedStats[1] as NSNumber
+        viewedGraph?.boolean = district.viewedStats[2] as NSNumber
+        viewedDemos?.boolean = district.viewedStats[3] as NSNumber
+        viewedRace?.boolean = district.viewedStats[4] as NSNumber
+        viewedIncome?.boolean = district.viewedStats[5] as NSNumber
+        viewedEd?.boolean = district.viewedStats[6] as NSNumber
         timestamp?.s = dFormatter.string(from: Date())
         
         let value = AWSDynamoDBAttributeValue()
-        value?.m = ["timestamp": timestamp!,"fair": fair!, "timeToDecide": timeToDecide!, "viewedMap": viewedMap!, "viewedGraph": viewedGraph!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
+        value?.m = ["timestamp": timestamp!,"fair": fair!, "timeToDecide": timeToDecide!,"viewedName": viewedName!, "viewedMap": viewedMap!, "viewedGraph": viewedGraph!, "viewedDemographics":viewedDemos!, "viewedRace": viewedRace!, "viewedIncome":viewedIncome!, "viewedEducation": viewedEd!]
         
         let valueUpdate = AWSDynamoDBAttributeValueUpdate()
         valueUpdate?.value = value
