@@ -20,6 +20,11 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     var educationDataPoints = [PieChartDataEntry]()
     var raceDataPoints = [PieChartDataEntry]()
     
+    var stateEdPoints = [PieChartDataEntry]()
+    var stateRacePoints = [PieChartDataEntry]()
+
+    var state: State?
+    
     let distMan = DistrictManager.sharedInstance
     let sections = ["Name", "Full Map", "Adjacency", "Demographics", "Income", "Race", "Education"]
     let themeColor = UIColor(red: 88.0/256, green: 186.0/256, blue: 157.0/256, alpha: 1.0)
@@ -33,8 +38,11 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // to get fancy headers
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         
+        // prepopulates data points
+        // VERY HACKY -- combines hispanics with white
         if let district = currentDistrict{
             var i = 0
             for edPoint in district.education{
@@ -53,6 +61,32 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                     raceDataPoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
                 }
                 
+                i = i + 1
+            }
+            
+            guard let stateData = StatesManager.sharedInstance.states[district.state] else{
+                return
+            }
+            
+            self.state = stateData
+            
+            i = 0
+            for edPoint in stateData.education{
+                stateEdPoints.append(PieChartDataEntry(value: Double(edPoint), label: educationLegend[i]))
+                i = i + 1
+            }
+            
+            i = 0
+            for racePoint in stateData.race{
+                
+                if raceLegend[i] == "White"{
+                    stateRacePoints.append(PieChartDataEntry(value: Double(racePoint - Double(currentDistrict!.numHispanic)), label: raceLegend[i]))
+                    stateRacePoints.append(PieChartDataEntry(value: Double(currentDistrict!.numHispanic), label:
+                        "Hispanic"))
+                }
+                else{
+                    raceDataPoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
+                }
                 i = i + 1
             }
         }
@@ -99,6 +133,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
     }
     
     @objc func sectionSelected(recognizer: UITapGestureRecognizer){
+        
+        // responds to selected section
         if selectedSection != recognizer.view?.tag{
             self.tableView.beginUpdates()
             
@@ -220,7 +256,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             
         case 5:
             let stack = cell.contentView.subviews[0] as! UIStackView
-            let chart = stack.arrangedSubviews[0] as! PieChartView
+            let state_chart = stack.arrangedSubviews[0] as! PieChartView
+            let chart = stack.arrangedSubviews[1] as! PieChartView
             
             if chart.data == nil{
                 let dset = PieChartDataSet(values: raceDataPoints, label: nil)
@@ -228,20 +265,63 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 dset.drawValuesEnabled = false
                 let data = PieChartData(dataSet: dset)
                 chart.data = data
-                chart.chartDescription = nil
+                
+                let description = Description()
+                description.text = "Local"
+                
+                chart.chartDescription = description
                 chart.drawEntryLabelsEnabled = false
                 chart.usePercentValuesEnabled = true
                 chart.notifyDataSetChanged()
             }
+            
+            if state_chart.data == nil{
+                
+                let dset = PieChartDataSet(values: raceDataPoints, label: nil)
+                dset.colors = ChartColorTemplates.joyful()
+                dset.drawValuesEnabled = false
+                let data = PieChartData(dataSet: dset)
+                state_chart.data = data
+                
+                let description = Description()
+                description.text = "Statewide"
+                
+                
+                state_chart.chartDescription = description
+                state_chart.drawEntryLabelsEnabled = false
+                state_chart.usePercentValuesEnabled = true
+                state_chart.notifyDataSetChanged()
+            }
         case 6:
-            let chart = cell.contentView.subviews[0] as! PieChartView
+            let stack = cell.contentView.subviews[0] as! UIStackView
+            let state_chart = stack.arrangedSubviews[0] as! PieChartView
+            let chart = stack.arrangedSubviews[1] as! PieChartView
+
             if chart.data == nil{
                 let dset = PieChartDataSet(values: educationDataPoints, label: nil)
                 dset.colors = ChartColorTemplates.joyful()
                 dset.drawValuesEnabled = false
                 let data = PieChartData(dataSet: dset)
                 chart.data = data
-                chart.chartDescription = nil
+                
+                let description = Description()
+                description.text = "Local"
+                
+                chart.chartDescription = description
+                chart.drawEntryLabelsEnabled = false
+                chart.notifyDataSetChanged()
+            }
+            if state_chart.data == nil{
+                let dset = PieChartDataSet(values: stateEdPoints, label: nil)
+                dset.colors = ChartColorTemplates.joyful()
+                dset.drawValuesEnabled = false
+                let data = PieChartData(dataSet: dset)
+                chart.data = data
+                
+                let description = Description()
+                description.text = "Statewide"
+                
+                chart.chartDescription = description
                 chart.drawEntryLabelsEnabled = false
                 chart.notifyDataSetChanged()
             }

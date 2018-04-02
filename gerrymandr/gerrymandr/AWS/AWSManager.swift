@@ -13,6 +13,7 @@ import AWSDynamoDB
 import FBSDKLoginKit
 
 class AWSManager{
+    // Singleton
     static var sharedInstance = AWSManager()
     
     var dynamoDB: AWSDynamoDB?
@@ -22,6 +23,7 @@ class AWSManager{
     let credProvider: AWSCognitoCredentialsProvider
     
     init(){
+        // Sets up the credentials provider to use Facebook
         credProvider = AWSCognitoCredentialsProvider(regionType: .USEast2, identityPoolId: "us-east-2:f872974e-2a10-46e0-95fd-83cd6beadfbe", identityProviderManager: FacebookProvider())
         let configuration = AWSServiceConfiguration(region: .USEast2, credentialsProvider: credProvider)
         
@@ -32,12 +34,17 @@ class AWSManager{
             [unowned self] note in
             self.facebookTokenChange()
         }
+        
+        facebookTokenChange()
     }
     
     func facebookTokenChange(){
+        // if we get a token, setup AWS
         if let _ = FBSDKAccessToken.current(){
             self.setupAWS()
         }
+            
+        // otherwise log out
         else{
             credProvider.clearKeychain()
             credProvider.clearCredentials()
@@ -51,6 +58,7 @@ class AWSManager{
 
     }
     
+    // sets up DynamoDB and sends out a LoggedIn notification
     func setupAWS(){
         credProvider.getIdentityId().continueWith(block: {[unowned self](task) -> AnyObject? in
             if task.error != nil{

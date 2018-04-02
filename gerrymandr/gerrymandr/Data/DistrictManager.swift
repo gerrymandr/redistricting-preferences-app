@@ -17,6 +17,7 @@ class DistrictManager {
     static var sharedInstance = DistrictManager()
     
     init(){
+        // gets the sql path
         let sqlPath = Bundle.main.path(forResource: "districts", ofType: "sql")
         
         if sqlite3_open(sqlPath, &db) != SQLITE_OK{
@@ -27,6 +28,7 @@ class DistrictManager {
             let countSQL = "SELECT COUNT(*) FROM districts"
             var countStatement: OpaquePointer? = nil
             
+            // gets the total number of districts
             if sqlite3_prepare(db, countSQL, -1, &countStatement, nil) == SQLITE_OK{
                 if sqlite3_step(countStatement) == SQLITE_ROW{
                     districtCount = Int(sqlite3_column_int(countStatement, 0))
@@ -90,11 +92,13 @@ class DistrictManager {
         let splitCentroid = centroidString.split(separator: ",")
         let centroid = CLLocation(latitude: Double(splitCentroid[1])!, longitude: Double(splitCentroid[0])!)
         
+        // centroid coords are separated by spaces
         for adjCent in adjacentCentroidString.split(separator: " "){
             let splitAdjCent = adjCent.split(separator: ",")
             adjCentroids.append(CLLocation(latitude: Double(splitAdjCent[1])!, longitude: Double(splitAdjCent[0])!))
         }
         
+        // | delineates polygons, spaces separate coordinates, ',' separates long and lat
         for district in coordString.split(separator: "|"){
             var tarray = [CLLocation]()
             for pair in district.split(separator: " "){

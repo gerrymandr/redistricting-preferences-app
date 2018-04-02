@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
         NotificationCenter.default.addObserver(forName: NSNotification.Name("LoggedIn"), object: nil, queue: nil){
             [unowned self] note in
             self.loggedIn = true
+            self.performSegue(withIdentifier: "loginCompleted", sender: nil)
         }
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCB-Hy-ssu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCB-Hy-ssu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -266,8 +266,12 @@ Built using Icons8, Koloda, and Charts.</string>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="adM-69-0yE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                             <subviews>
+                                                <view clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpF-76-z0w" customClass="PieChartView" customModule="Charts">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="149.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCd-E0-8x6" customClass="PieChartView" customModule="Charts">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="149.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -390,16 +394,25 @@ Built using Icons8, Koloda, and Charts.</string>
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMg-Il-01C" customClass="PieChartView" customModule="Charts">
-                                            <rect key="frame" x="16" y="11" width="343" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oAD-2H-LVW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMg-Il-01C" customClass="PieChartView" customModule="Charts">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="149.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlp-L6-iCY" customClass="PieChartView" customModule="Charts">
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="149.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="wMg-Il-01C" secondAttribute="bottom" id="1Yp-nS-bq9"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="wMg-Il-01C" secondAttribute="trailing" id="Avj-hM-Ww4"/>
-                                        <constraint firstItem="wMg-Il-01C" firstAttribute="top" secondItem="5Wq-Yb-g8V" secondAttribute="topMargin" id="MBR-X9-9ws"/>
-                                        <constraint firstItem="wMg-Il-01C" firstAttribute="leading" secondItem="5Wq-Yb-g8V" secondAttribute="leadingMargin" id="O2q-uH-AnT"/>
+                                        <constraint firstAttribute="trailing" secondItem="oAD-2H-LVW" secondAttribute="trailing" id="9Zv-Im-cAV"/>
+                                        <constraint firstAttribute="bottom" secondItem="oAD-2H-LVW" secondAttribute="bottom" id="cxA-Ks-xL1"/>
+                                        <constraint firstItem="oAD-2H-LVW" firstAttribute="leading" secondItem="5Wq-Yb-g8V" secondAttribute="leading" id="kEe-bn-3D7"/>
+                                        <constraint firstItem="oAD-2H-LVW" firstAttribute="top" secondItem="5Wq-Yb-g8V" secondAttribute="top" id="mnw-Ue-zB0"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -411,7 +424,7 @@ Built using Icons8, Koloda, and Charts.</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9tc-wp-vqm">
-                                            <rect key="frame" x="8" y="11" width="359" height="278"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="283.5"/>
                                         </mapView>
                                     </subviews>
                                     <constraints>
@@ -430,7 +443,7 @@ Built using Icons8, Koloda, and Charts.</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dXR-7I-hv4">
-                                            <rect key="frame" x="8" y="11" width="359" height="278"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="283.5"/>
                                         </mapView>
                                     </subviews>
                                     <constraints>

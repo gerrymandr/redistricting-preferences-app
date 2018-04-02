@@ -16,6 +16,7 @@ class AboutViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Formats text to have links
         let attributed = NSMutableAttributedString(string: "Developed by the Metric Geometry and Gerrymandering Group.\n\nBuilt using Icons8, Koloda, and Charts.")
         attributed.addAttributes([NSAttributedStringKey.link: "https://sites.tufts.edu/gerrymandr/"], range: NSRange(location: 17, length: 40))
         attributed.addAttributes([NSAttributedStringKey.link: "https://icons8.com/"], range: NSRange(location: 72, length: 7))

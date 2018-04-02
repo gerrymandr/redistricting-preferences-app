@@ -37,6 +37,7 @@ fips_codes = json.load(j_file)
 j_file.close()
 
 districts = []
+states = {}
 
 # id for random selection in app
 i = 0
@@ -139,6 +140,18 @@ for i, dist in data.iterrows():
     coords_str = "|".join(coords)
     districts.append((i, name, district_number, coords_str, people, hispanic, medage, medincome, race[:-1], str(l_hs) + "," + education[:-1], cent_string, adj_cent_str, adj_dist_str))
 
+    st_data = states.get(name, {"people": 0, "hispanic": 0, "race": [0]*5, "education": [0]*6})
+    st_data["people"] += people
+    st_data["hispanic"] += hispanic
+    for i, val in enumerate(race[:-1].split(",")):
+        st_data["race"][i] += int(val)
+    for i, val in enumerate([l_hs] + education[:-1].split(",")):
+        st_data["education"][i] += int(val)
+
+    states[name] = st_data
+
+
+
 
 # opens a connection; probably should check to see if it already exists...
 conn = sqlite3.connect("districts.sql")
@@ -168,3 +181,8 @@ curs.executemany("INSERT INTO districts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 
 conn.commit()
 conn.close()
+
+with open('state_data.json', 'w') as file:
+    json.dump(states, file)
+
+

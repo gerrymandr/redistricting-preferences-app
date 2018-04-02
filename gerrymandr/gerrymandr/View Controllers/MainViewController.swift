@@ -39,6 +39,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.barStyle = .blackTranslucent
         
+        // target for clicks
         (cardView.viewWithTag(1)?.viewWithTag(3) as! UIButton).addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         (cardView.viewWithTag(7) as! MKMapView).delegate = self
         
@@ -60,6 +61,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         self.performSegue(withIdentifier: "showInfo", sender: nil)
     }
     
+    // responds to swiping
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         if direction == .right{
             district!.fair = true
@@ -100,24 +102,24 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     
     func configureView(district: District){
         let map = cardView.viewWithTag(7) as! MKMapView
-        let barView = cardView.viewWithTag(1)!
-        let label = barView.viewWithTag(2) as! UILabel
-        
         
         var minX = Double.infinity
         var minY = Double.infinity
         var spanX = 0.0
         var spanY = -0.0
         
+        // just in case card is prepopulated
         if self.polygons.count > 0{
             map.removeOverlays(self.polygons)
             self.polygons.removeAll()
         }
         
+        // relaces background
         let tile = MKTileOverlay(urlTemplate: nil)
         tile.canReplaceMapContent = true
         map.add(tile)
         
+        // goes over the shapes and adds them to overlays
         for shape in district.coordinates{
             var mapPoints = [MKMapPoint]()
             for location in shape{
@@ -151,10 +153,10 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             self.polygons.append(overlay)
         }
         
+        // sets the region and visible areas
         region = MKMapRectMake(minX, minY, spanX, spanY)
         map.setVisibleMapRect(region!, edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
         
-        label.text = "District ??"
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -189,6 +191,7 @@ class MainViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     
 }
 
+// blanks out the background
 class BlankRenderer: MKOverlayRenderer{
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
         let rect = self.rect(for: mapRect)
