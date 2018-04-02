@@ -85,7 +85,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                         "Hispanic"))
                 }
                 else{
-                    raceDataPoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
+                    stateRacePoints.append(PieChartDataEntry(value: Double(racePoint), label: raceLegend[i]))
                 }
                 i = i + 1
             }
@@ -277,7 +277,7 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             
             if state_chart.data == nil{
                 
-                let dset = PieChartDataSet(values: raceDataPoints, label: nil)
+                let dset = PieChartDataSet(values: stateRacePoints, label: nil)
                 dset.colors = ChartColorTemplates.joyful()
                 dset.drawValuesEnabled = false
                 let data = PieChartData(dataSet: dset)
@@ -316,14 +316,14 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 dset.colors = ChartColorTemplates.joyful()
                 dset.drawValuesEnabled = false
                 let data = PieChartData(dataSet: dset)
-                chart.data = data
+                state_chart.data = data
                 
                 let description = Description()
                 description.text = "Statewide"
                 
-                chart.chartDescription = description
-                chart.drawEntryLabelsEnabled = false
-                chart.notifyDataSetChanged()
+                state_chart.chartDescription = description
+                state_chart.drawEntryLabelsEnabled = false
+                state_chart.notifyDataSetChanged()
             }
         default:
             break

@@ -263,7 +263,7 @@ Built using Icons8, Koloda, and Charts.</string>
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="adM-69-0yE">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="adM-69-0yE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                             <subviews>
                                                 <view clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpF-76-z0w" customClass="PieChartView" customModule="Charts">
@@ -278,7 +278,6 @@ Built using Icons8, Koloda, and Charts.</string>
                                             <constraints>
                                                 <constraint firstItem="TCd-E0-8x6" firstAttribute="top" secondItem="adM-69-0yE" secondAttribute="top" id="YvC-lN-8wZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="TCd-E0-8x6" secondAttribute="bottom" id="hBC-a7-Q0A"/>
-                                                <constraint firstItem="TCd-E0-8x6" firstAttribute="leading" secondItem="adM-69-0yE" secondAttribute="leading" id="ixH-nT-km4"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
