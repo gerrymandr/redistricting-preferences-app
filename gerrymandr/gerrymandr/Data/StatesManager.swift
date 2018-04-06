@@ -15,7 +15,7 @@ class StatesManager{
     
     init(){
         // loads the state json file
-        if let jsonPath = Bundle.main.path(forResource: "state_data", ofType: "json"){
+        if let jsonPath = Bundle.main.path(forResource: "states-data", ofType: "json"){
             do{
                 let data = try Data(contentsOf: URL(fileURLWithPath: jsonPath))
                 let json = try JSONSerialization.jsonObject(with: data)
@@ -26,7 +26,7 @@ class StatesManager{
                 }
             }
             catch{
-                NSLog("Unable to load states")
+                print("Unable to load states")
             }
         }
     }

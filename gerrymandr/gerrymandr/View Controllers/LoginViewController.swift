@@ -39,7 +39,6 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
         super.viewDidAppear(animated)
         if self.loggedIn{
             self.performSegue(withIdentifier: "loginCompleted", sender: nil)
-            self.loggedIn = false
         }
     }
     
@@ -91,4 +90,8 @@ class LoginViewController: UIViewController, UIPageViewControllerDataSource {
         return getWalkthroughVCAt(index: index)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.loggedIn = false
+    }
 }

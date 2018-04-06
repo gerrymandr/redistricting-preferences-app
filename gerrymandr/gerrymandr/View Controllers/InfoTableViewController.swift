@@ -80,8 +80,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             for racePoint in stateData.race{
                 
                 if raceLegend[i] == "White"{
-                    stateRacePoints.append(PieChartDataEntry(value: Double(racePoint - Double(currentDistrict!.numHispanic)), label: raceLegend[i]))
-                    stateRacePoints.append(PieChartDataEntry(value: Double(currentDistrict!.numHispanic), label:
+                    stateRacePoints.append(PieChartDataEntry(value: Double(racePoint - Double(stateData.numHispanic)), label: raceLegend[i]))
+                    stateRacePoints.append(PieChartDataEntry(value: Double(stateData.numHispanic), label:
                         "Hispanic"))
                 }
                 else{
@@ -234,24 +234,37 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             map.setVisibleMapRect(MKMapRectMake(minX, minY, spanX, spanY), edgePadding: UIEdgeInsets(top: 10, left:10, bottom:10, right:10), animated: false)
 
         case 3:
-            let stack = cell.contentView.subviews[0] as! UIStackView
-            let popLabel = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
-            let ageLabel = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let outer_stack = cell.contentView.subviews[0] as! UIStackView
+            let pop_stack = outer_stack.arrangedSubviews[0] as! UIStackView
+            let age_stack = outer_stack.arrangedSubviews[1] as! UIStackView
+            
+            let statePopLabel = pop_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
+            let popLabel = pop_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            
+            let stateAgeLabel = age_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
+            let ageLabel = age_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
             
             let numFormat = NumberFormatter()
             numFormat.numberStyle = .decimal
             numFormat.usesGroupingSeparator = true
             
             popLabel.text = numFormat.string(from: NSNumber(value: currentDistrict!.numPeople))
+            statePopLabel.text = numFormat.string(from: NSNumber(value: state!.numPeople))
+
             ageLabel.text = String(currentDistrict!.medAge)
+            stateAgeLabel.text = String(state!.medAge)
             
         case 4:
-            let label = cell.contentView.viewWithTag(2) as! UILabel
+            let stack = cell.contentView.viewWithTag(1) as! UIStackView
+            
+            let stateLabel = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
+            let label = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
             
             let numFormat = NumberFormatter()
             numFormat.numberStyle = .currency
             numFormat.usesGroupingSeparator = true
             
+            stateLabel.text = numFormat.string(from: NSNumber(value: state!.medIncome))
             label.text = numFormat.string(from: NSNumber(value: currentDistrict!.medIncome))
             
         case 5:
@@ -267,7 +280,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 chart.data = data
                 
                 let description = Description()
-                description.text = "Local"
+                description.text = "(local)"
+                description.font = UIFont(name: "Dosis", size: 15.0)!
                 
                 chart.chartDescription = description
                 chart.drawEntryLabelsEnabled = false
@@ -284,8 +298,9 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 state_chart.data = data
                 
                 let description = Description()
-                description.text = "Statewide"
-                
+                description.text = "(state)"
+                description.font = UIFont(name: "Dosis", size: 15.0)!
+
                 
                 state_chart.chartDescription = description
                 state_chart.drawEntryLabelsEnabled = false
@@ -305,7 +320,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 chart.data = data
                 
                 let description = Description()
-                description.text = "Local"
+                description.text = "(local)"
+                description.font = UIFont(name: "Dosis", size: 15.0)!
                 
                 chart.chartDescription = description
                 chart.drawEntryLabelsEnabled = false
@@ -319,7 +335,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
                 state_chart.data = data
                 
                 let description = Description()
-                description.text = "Statewide"
+                description.text = "(state)"
+                description.font = UIFont(name: "Dosis", size: 15.0)!
                 
                 state_chart.chartDescription = description
                 state_chart.drawEntryLabelsEnabled = false
