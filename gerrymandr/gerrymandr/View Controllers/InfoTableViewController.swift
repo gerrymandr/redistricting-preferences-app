@@ -238,11 +238,11 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             let pop_stack = outer_stack.arrangedSubviews[0] as! UIStackView
             let age_stack = outer_stack.arrangedSubviews[1] as! UIStackView
             
-            let statePopLabel = pop_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
-            let popLabel = pop_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let statePopLabel = pop_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let popLabel = pop_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
             
-            let stateAgeLabel = age_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
-            let ageLabel = age_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let stateAgeLabel = age_stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let ageLabel = age_stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
             
             let numFormat = NumberFormatter()
             numFormat.numberStyle = .decimal
@@ -257,8 +257,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
         case 4:
             let stack = cell.contentView.viewWithTag(1) as! UIStackView
             
-            let stateLabel = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
-            let label = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let stateLabel = stack.arrangedSubviews[1].viewWithTag(2) as! UILabel
+            let label = stack.arrangedSubviews[0].viewWithTag(2) as! UILabel
             
             let numFormat = NumberFormatter()
             numFormat.numberStyle = .currency
@@ -269,8 +269,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             
         case 5:
             let stack = cell.contentView.subviews[0] as! UIStackView
-            let state_chart = stack.arrangedSubviews[0] as! PieChartView
-            let chart = stack.arrangedSubviews[1] as! PieChartView
+            let state_chart = stack.arrangedSubviews[1] as! PieChartView
+            let chart = stack.arrangedSubviews[0] as! PieChartView
             
             if chart.data == nil{
                 let dset = PieChartDataSet(values: raceDataPoints, label: nil)
@@ -309,8 +309,8 @@ class InfoTableViewController: UITableViewController, MKMapViewDelegate {
             }
         case 6:
             let stack = cell.contentView.subviews[0] as! UIStackView
-            let state_chart = stack.arrangedSubviews[0] as! PieChartView
-            let chart = stack.arrangedSubviews[1] as! PieChartView
+            let state_chart = stack.arrangedSubviews[1] as! PieChartView
+            let chart = stack.arrangedSubviews[0] as! PieChartView
 
             if chart.data == nil{
                 let dset = PieChartDataSet(values: educationDataPoints, label: nil)

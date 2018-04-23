@@ -301,8 +301,33 @@ Data from US Census Bureau and Statista</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5yZ-rq-KLv">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <subviews>
-                                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="685-By-6Pa">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6c-1a-eBI">
                                                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="75"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="people (local)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONN-Zg-qG8">
+                                                                    <rect key="frame" x="38.5" y="42" width="111" height="25.5"/>
+                                                                    <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                                    <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="600,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pht-Tn-bCk">
+                                                                    <rect key="frame" x="50" y="9" width="89" height="32"/>
+                                                                    <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="25"/>
+                                                                    <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="pht-Tn-bCk" firstAttribute="top" secondItem="C6c-1a-eBI" secondAttribute="top" constant="9" id="5km-hc-n5h"/>
+                                                                <constraint firstItem="ONN-Zg-qG8" firstAttribute="centerX" secondItem="C6c-1a-eBI" secondAttribute="centerX" id="CoY-kv-8K6"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ONN-Zg-qG8" secondAttribute="bottom" constant="7.5" id="JvD-MK-diN"/>
+                                                                <constraint firstItem="pht-Tn-bCk" firstAttribute="centerX" secondItem="C6c-1a-eBI" secondAttribute="centerX" id="nrZ-au-pSR"/>
+                                                            </constraints>
+                                                            <viewLayoutGuide key="safeArea" id="DKG-yh-yhR"/>
+                                                        </view>
+                                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="685-By-6Pa">
+                                                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="75"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="people (state)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUf-Vl-acl">
                                                                     <rect key="frame" x="37.5" y="42" width="114" height="25.5"/>
@@ -326,17 +351,22 @@ Data from US Census Bureau and Statista</string>
                                                             </constraints>
                                                             <viewLayoutGuide key="safeArea" id="YxN-Xp-dS2"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6c-1a-eBI">
-                                                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="75"/>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8XT-rA-03I">
+                                                    <rect key="frame" x="0.0" y="75" width="375" height="74.5"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="494-Ae-w63">
+                                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="74.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONN-Zg-qG8">
-                                                                    <rect key="frame" x="66" y="42" width="55.5" height="25.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="median age (local)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7d-Vb-iuM">
+                                                                    <rect key="frame" x="19.5" y="41.5" width="149" height="25.5"/>
                                                                     <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
                                                                     <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="600,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pht-Tn-bCk">
-                                                                    <rect key="frame" x="50" y="9" width="89" height="32"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="39.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjq-Y2-WQ6">
+                                                                    <rect key="frame" x="71.5" y="9" width="44.5" height="32"/>
                                                                     <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="25"/>
                                                                     <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -344,20 +374,15 @@ Data from US Census Bureau and Statista</string>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstItem="pht-Tn-bCk" firstAttribute="top" secondItem="C6c-1a-eBI" secondAttribute="top" constant="9" id="5km-hc-n5h"/>
-                                                                <constraint firstItem="ONN-Zg-qG8" firstAttribute="centerX" secondItem="C6c-1a-eBI" secondAttribute="centerX" id="CoY-kv-8K6"/>
-                                                                <constraint firstAttribute="bottom" secondItem="ONN-Zg-qG8" secondAttribute="bottom" constant="7.5" id="JvD-MK-diN"/>
-                                                                <constraint firstItem="pht-Tn-bCk" firstAttribute="centerX" secondItem="C6c-1a-eBI" secondAttribute="centerX" id="nrZ-au-pSR"/>
+                                                                <constraint firstAttribute="bottom" secondItem="p7d-Vb-iuM" secondAttribute="bottom" constant="7.5" id="Iv6-vA-Rhu"/>
+                                                                <constraint firstItem="Wjq-Y2-WQ6" firstAttribute="centerX" secondItem="494-Ae-w63" secondAttribute="centerX" id="cv0-My-Llr"/>
+                                                                <constraint firstItem="p7d-Vb-iuM" firstAttribute="centerX" secondItem="494-Ae-w63" secondAttribute="centerX" id="dvg-GQ-52R"/>
+                                                                <constraint firstItem="Wjq-Y2-WQ6" firstAttribute="top" secondItem="494-Ae-w63" secondAttribute="top" constant="9" id="pGO-gb-vNP"/>
                                                             </constraints>
-                                                            <viewLayoutGuide key="safeArea" id="DKG-yh-yhR"/>
+                                                            <viewLayoutGuide key="safeArea" id="sjW-EB-o5X"/>
                                                         </view>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8XT-rA-03I">
-                                                    <rect key="frame" x="0.0" y="75" width="375" height="74.5"/>
-                                                    <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzD-8F-OHq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="74.5"/>
+                                                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="74.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="med age (state)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwb-hx-b6M">
                                                                     <rect key="frame" x="30" y="41.5" width="127.5" height="25.5"/>
@@ -380,31 +405,6 @@ Data from US Census Bureau and Statista</string>
                                                                 <constraint firstItem="FRN-Ml-3bw" firstAttribute="centerX" secondItem="nzD-8F-OHq" secondAttribute="centerX" id="mcW-FU-KD4"/>
                                                             </constraints>
                                                             <viewLayoutGuide key="safeArea" id="WT5-B2-aGw"/>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="494-Ae-w63">
-                                                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="74.5"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="median age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7d-Vb-iuM">
-                                                                    <rect key="frame" x="47" y="41.5" width="93.5" height="25.5"/>
-                                                                    <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                                    <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="39.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjq-Y2-WQ6">
-                                                                    <rect key="frame" x="71.5" y="9" width="44.5" height="32"/>
-                                                                    <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="25"/>
-                                                                    <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="p7d-Vb-iuM" secondAttribute="bottom" constant="7.5" id="Iv6-vA-Rhu"/>
-                                                                <constraint firstItem="Wjq-Y2-WQ6" firstAttribute="centerX" secondItem="494-Ae-w63" secondAttribute="centerX" id="cv0-My-Llr"/>
-                                                                <constraint firstItem="p7d-Vb-iuM" firstAttribute="centerX" secondItem="494-Ae-w63" secondAttribute="centerX" id="dvg-GQ-52R"/>
-                                                                <constraint firstItem="Wjq-Y2-WQ6" firstAttribute="top" secondItem="494-Ae-w63" secondAttribute="top" constant="9" id="pGO-gb-vNP"/>
-                                                            </constraints>
-                                                            <viewLayoutGuide key="safeArea" id="sjW-EB-o5X"/>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -429,34 +429,8 @@ Data from US Census Bureau and Statista</string>
                                         <stackView opaque="NO" tag="1" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="S8y-S2-kFB">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5C-g7-dyH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="150"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$52,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub6-9O-ZDd">
-                                                            <rect key="frame" x="51" y="46" width="85.5" height="32"/>
-                                                            <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="25"/>
-                                                            <color key="textColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="med. income (state)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1K-RT-5QF">
-                                                            <rect key="frame" x="13" y="86.5" width="162.5" height="25.5"/>
-                                                            <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
-                                                            <color key="textColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="ub6-9O-ZDd" firstAttribute="centerX" secondItem="E5C-g7-dyH" secondAttribute="centerX" id="2Cx-9z-krz"/>
-                                                        <constraint firstItem="M1K-RT-5QF" firstAttribute="top" secondItem="ub6-9O-ZDd" secondAttribute="bottom" constant="8" symbolic="YES" id="a6l-ji-dHk"/>
-                                                        <constraint firstItem="aPn-PC-Iqy" firstAttribute="bottom" secondItem="M1K-RT-5QF" secondAttribute="bottom" constant="38" id="i2s-4f-nY5"/>
-                                                        <constraint firstItem="ub6-9O-ZDd" firstAttribute="top" secondItem="aPn-PC-Iqy" secondAttribute="top" constant="46" id="nW9-pu-3gb"/>
-                                                        <constraint firstItem="M1K-RT-5QF" firstAttribute="centerX" secondItem="E5C-g7-dyH" secondAttribute="centerX" id="w8v-YH-zYm"/>
-                                                    </constraints>
-                                                    <viewLayoutGuide key="safeArea" id="aPn-PC-Iqy"/>
-                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xup-uP-Xaj">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="150"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="150"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$52,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3W-mq-nf2">
                                                             <rect key="frame" x="51" y="46" width="85.5" height="32"/>
@@ -480,6 +454,32 @@ Data from US Census Bureau and Statista</string>
                                                         <constraint firstItem="tit-xJ-22i" firstAttribute="top" secondItem="Y3W-mq-nf2" secondAttribute="bottom" constant="8" symbolic="YES" id="w2j-WE-Pyu"/>
                                                     </constraints>
                                                     <viewLayoutGuide key="safeArea" id="8Eq-Bk-h0Z"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5C-g7-dyH">
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="150"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$52,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub6-9O-ZDd">
+                                                            <rect key="frame" x="51" y="46" width="85.5" height="32"/>
+                                                            <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="25"/>
+                                                            <color key="textColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="med. income (state)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1K-RT-5QF">
+                                                            <rect key="frame" x="13" y="86.5" width="162.5" height="25.5"/>
+                                                            <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
+                                                            <color key="textColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="ub6-9O-ZDd" firstAttribute="centerX" secondItem="E5C-g7-dyH" secondAttribute="centerX" id="2Cx-9z-krz"/>
+                                                        <constraint firstItem="M1K-RT-5QF" firstAttribute="top" secondItem="ub6-9O-ZDd" secondAttribute="bottom" constant="8" symbolic="YES" id="a6l-ji-dHk"/>
+                                                        <constraint firstItem="aPn-PC-Iqy" firstAttribute="bottom" secondItem="M1K-RT-5QF" secondAttribute="bottom" constant="38" id="i2s-4f-nY5"/>
+                                                        <constraint firstItem="ub6-9O-ZDd" firstAttribute="top" secondItem="aPn-PC-Iqy" secondAttribute="top" constant="46" id="nW9-pu-3gb"/>
+                                                        <constraint firstItem="M1K-RT-5QF" firstAttribute="centerX" secondItem="E5C-g7-dyH" secondAttribute="centerX" id="w8v-YH-zYm"/>
+                                                    </constraints>
+                                                    <viewLayoutGuide key="safeArea" id="aPn-PC-Iqy"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
@@ -645,7 +645,7 @@ Data from US Census Bureau and Statista</string>
         <image name="csail" width="160" height="122"/>
         <image name="done" width="33" height="33"/>
         <image name="fair" width="33" height="33"/>
-        <image name="photo1" width="392" height="683"/>
+        <image name="photo1" width="392" height="682"/>
         <image name="settings" width="22" height="22"/>
         <image name="tufts" width="160" height="72"/>
         <image name="unfair" width="33" height="33"/>
