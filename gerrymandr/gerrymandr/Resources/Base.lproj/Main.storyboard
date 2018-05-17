@@ -438,8 +438,8 @@ Data from US Census Bureau and Statista</string>
                                                             <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="med. income" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tit-xJ-22i">
-                                                            <rect key="frame" x="42.5" y="86.5" width="103.5" height="25.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="med. income (local)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tit-xJ-22i">
+                                                            <rect key="frame" x="15" y="86.5" width="159" height="25.5"/>
                                                             <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="20"/>
                                                             <color key="textColor" red="0.34509803919999998" green="0.72941176470000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
