@@ -1,5 +1,0 @@
-Expects census districts to be under ShapeFiles subdirectory and demographics data downloaded from My Congressional District to be under Demographics Data.
-
-Census data should be in separated CSVs named after the state (eg "texas.csv") and contain all districts.
-
-Also requires output from FIPS2JSON to be in directory and named states.json
